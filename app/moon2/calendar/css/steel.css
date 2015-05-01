@@ -1,0 +1,63 @@
+.DynarchCalendar-focused {
+	background-color: rgb(255, 255, 255);
+}
+.DynarchCalendar-topBar {
+	background: url("../img/steel/brushed-steel.jpg") no-repeat 50% 0px;
+}
+.DynarchCalendar-bottomBar {
+	background: url("../img/steel/brushed-steel.jpg") no-repeat 50% 50%;
+}
+.DynarchCalendar-hover-title {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(221, 221, 238);
+}
+.DynarchCalendar-hover-navBtn {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(221, 221, 238);
+}
+.DynarchCalendar-hover-bottomBar-today {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(221, 221, 238);
+}
+.DynarchCalendar-menu table td div.DynarchCalendar-hover-navBtn {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(221, 221, 238);
+}
+.DynarchCalendar-hover-title div {
+	background-color: transparent;
+}
+.DynarchCalendar-hover-navBtn div {
+	background-color: transparent;
+}
+.DynarchCalendar-pressed-title {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(68, 68, 85);
+}
+.DynarchCalendar-pressed-navBtn {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(68, 68, 85);
+}
+.DynarchCalendar-pressed-bottomBar-today {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(68, 68, 85);
+}
+.DynarchCalendar-menu table td div.DynarchCalendar-pressed-navBtn {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(68, 68, 85);
+}
+.DynarchCalendar-pressed-title div {
+	background-color: transparent;
+}
+.DynarchCalendar-pressed-navBtn div {
+	background-color: transparent;
+}
+.DynarchCalendar-hover-week {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(221, 221, 221);
+}
+.DynarchCalendar-focused .DynarchCalendar-hover-week {
+	background: url("../img/steel/coolbg.png") repeat-x 0px 50% rgb(221, 221, 221);
+}
+.DynarchCalendar {
+	background: url("../img/steel/steel.jpg") no-repeat 50% 30px;
+}
+.DynarchCalendar-day-selected {
+	background-position: 0px 50%; color: rgb(255, 255, 255) !important; background-image: url("coolbg.png"); background-repeat: repeat-x; background-color: rgb(24, 100, 252);
+}
+.DynarchCalendar-day-selected.DynarchCalendar-day-today {
+	color: rgb(255, 255, 255) !important; background-color: rgb(24, 100, 252);
+}
+.DynarchCalendar-focused .DynarchCalendar-body {
+	background: url("../img/steel/shadow-b.png") repeat-x 0px 0px;
+}
