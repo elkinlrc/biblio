@@ -23,9 +23,9 @@ $rsNumRows=0;
 $Data=array();
 $Data["busqueda"][$opcionBusqueda]=$palabraBusqueda;
 
-//$facadeAutores = new Modules_Empresa_Model_Edificiosfacade;
-$facade = new Modules_Biblio_Model_AutoresFacade();
-$facade->add_searchField("1","a.codautor");
+
+$facade = new Modules_Biblio_Model_ClasificacionesFacade();
+$facade->add_searchField("1","a.codclasificacion");
 $facade->add_searchField("2","a.nombre");
 //$facadeEdificios->add_searchField("3","e.edificio");
 
@@ -33,16 +33,17 @@ $facade->add_searchField("2","a.nombre");
 $Face = new Moon2_ViewManager_Controller();
 $Face->set_sysmenu(false);
 $Face->set_type("OUTSIDE");
-$Face->set_name("Listar Autores ");
+$Face->set_name("Listado de Clasificación ");
 
 $Face->add_navigation("Inicio", "index.php");
-$Face->add_navigation("Listar Autores", "#");
+$Face->add_navigation("Listado de Clasficacion Biblioteca", "#");
 
 
-
+//$registros = $facadeEdificios->load_all($rsNumRows, $limit_numrows, $page, $Data);
 $registros = $facade->load_all($rsNumRows, $limit_numrows, $page);
 $paginador = new Moon2_Pagination_Pager($rsNumRows, $limit_numrows, $page, $parametros);
 
 echo $Face->open();
 require($Face->getView());
 echo $Face->close();
+?>
