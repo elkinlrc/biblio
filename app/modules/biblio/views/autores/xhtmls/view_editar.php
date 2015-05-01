@@ -16,8 +16,9 @@ if (!isset($id_security)) {
                     <div class="widget-content">
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
                             <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
-                            <input type="hidden" id="action" name="action" value="crear" />
+                            <input type="hidden" id="action" name="action" value="editar" />
                             <input type="hidden" id="controller" name="controller" value="Biblio/AutoresController" />
+                            <input type="hidden" id="codautor" name="codautor" value="<?php echo $obj->get_codautor();?>" />
                             <table class="table table-bordered table-highlight">
                                 <thead>
                                     <tr>
@@ -30,11 +31,11 @@ if (!isset($id_security)) {
                                 <tbody> 
                                     <tr>
                                         <td>Autor</td>
-                                        <td><input type="text" id="nombre" name="nombre" class="form-control validate[required, minSize[4]]" size="30"/></td>
+                                        <td><input type="text" id="nombre" name="nombre" value="<?php echo $obj->get_nombre(); ?>" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
                                     
                                     <tr>
-                                        <td colspan="2"><input type="submit" value="Crear Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
+                                        <td colspan="2"><input type="submit" value="Actualizar Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
                                     </tr>
                                 </tbody>
                             </table>

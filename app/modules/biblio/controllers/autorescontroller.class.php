@@ -8,7 +8,7 @@ class Modules_Biblio_Controllers_AutoresController {
     private $_parameters;
     private $_pathConfig;
     private $_action;
-    public $_module="autores";
+    public  $_module="autores";
 
     public function __construct($param, $dom, $path) {
       
@@ -38,8 +38,6 @@ class Modules_Biblio_Controllers_AutoresController {
         
         $mensaje = 31;
         if ($facade->add($objo)) {
-
-
             $mensaje = 11;
         }
         $this->_parameters->delete_all();
@@ -49,7 +47,6 @@ class Modules_Biblio_Controllers_AutoresController {
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
         $vista = "/biblio/views/".$this->_module."/crear.php?";
-//   exit();
         header("Location: {$ruta}{$vista}{$cadenaurl}"); //Arma la ruta
     }
     public function  buscar(){
@@ -80,7 +77,6 @@ class Modules_Biblio_Controllers_AutoresController {
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
         $vista = "/biblio/views/".$this->_module."/index.php?";
-//      exit();
         header("Location: {$ruta}{$vista}{$cadenaurl}"); //Arma la ruta
     }
 
@@ -100,8 +96,7 @@ class Modules_Biblio_Controllers_AutoresController {
 
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
-        $vista = "/biblio/views/editar.php?";
-//        exit();
+        $vista = "/biblio/views/".$this->_module."/editar.php?";
         header("Location: {$ruta}{$vista}{$cadenaurl}"); //Arma la ruta
     }
 

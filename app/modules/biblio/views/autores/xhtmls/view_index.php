@@ -63,8 +63,15 @@ if (!isset($id_security)) {
                             <tbody>
                                 <?php
                                 foreach ($registros as $indice => $campo){
+                                    
+                                    $parametros->add("action", "eliminar");
+                                    $parametros->add("controller", "Modules_Biblio_Controllers_autoresController");
+                                    $parametros->add("codigo", $campo["codautor"]);
+                                    $parametros->add("SECURITY_ID", "FALSE");
+                                    $url_actualizar = $parametros->keyGen();
+                                    
                                     echo "<tr>";
-                                    echo "<td><a href=\"editar.php\">".$campo["codautor"]."</a></td>";
+                                    echo "<td><a href=\"editar.php?{$url_actualizar}\">".$campo["codautor"]."</a></td>";
                                     echo "<td>".$campo["nombre"]."</td>";
                                     
                                     echo "</tr>";
