@@ -11,33 +11,15 @@ if (!isset($id_security)) {
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
-                        <h3>Crear Autor</h3>
+                        <h3>Buscar libros</h3>
                     </div>
                     <div class="widget-content">
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
                             <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
                             <input type="hidden" id="action" name="action" value="crearAutores" />
                             <input type="hidden" id="controller" name="controller" value="Biblio/AutoresController" />
-                            <table class="table table-bordered table-highlight">
-                                <thead>
-                                    <tr>
-                                        <th colspan="2">Nuevo Autor</th>
-                                    </tr>
-
-
-
-                                </thead>
-                                <tbody> 
-                                    <tr>
-                                        <td>Autor</td>
-                                        <td><input type="text" id="nombre" name="nombre" class="form-control validate[required, minSize[4]]" size="30"/></td>
-                                    </tr>
-                                    
-                                    <tr>
-                                        <td colspan="2"><input type="submit" value="Crear Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <input type="text" id="buscado" name="buscador" value="" />
+                          
                         </form>
                     </div> <!-- /widget-content -->
                 </div> <!-- /widget stacked -->

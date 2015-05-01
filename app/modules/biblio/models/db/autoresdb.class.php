@@ -13,13 +13,16 @@ class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
 
     
      public function load_all(&$rsNumRows, $limit_numrows, $page, $Data) {
-
-         
+        
+        
+        $where=" ";
         $from = "FROM ".$this->_table." a ";
-        $where = $this->get_where($Data["busqueda"]);
+        if(isset($Data["busqueda"])){
+            $where = $this->get_where($Data["busqueda"]);
+        }
         $order = " ";
 
-                echo $where;    
+                   
 
         $sql_num = " SELECT COUNT(*) ";
         $sql_num.=$from;

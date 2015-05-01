@@ -1,7 +1,7 @@
 <?php
 $DOM["KRAUFF"]["INITIALVALUE"]	= 1;
 //$DOM["SYSTEMNAME"] = "MOON FrameWork <sup>2.2</sup>";
-$DOM["SYSTEMNAME"] = "Proyecto Final PWEB";
+$DOM["SYSTEMNAME"] = "Biblio - Software para bibliotecas ";
 
 
 $DOM["FMESSAGE"]["success"] = 1;
