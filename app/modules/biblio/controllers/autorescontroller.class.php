@@ -42,7 +42,7 @@ class Modules_Biblio_Controllers_AutoresController {
         }
         $this->_parameters->delete_all();
         $this->_parameters->add("msg", $mensaje);
-        $this->_parameters->add("codautor", $objo->get_codautor());
+        $this->_parameters->add("codautor", $obj->get_codautor());
 
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
@@ -65,14 +65,14 @@ class Modules_Biblio_Controllers_AutoresController {
     private function eliminar() {
         $obj = new Modules_Biblio_Model_Autores();
         $objo = $this->_parameters->set_object($objo);
-        $facade = new Modules_Empresa_Model_Sedesfacade();
+        $facade = new Modules_Biblio_Model_AutoresFacade();
         $mensaje = 32;
         if ($facade->delete($objo)) {
             $mensaje = 12;
         }
         $this->_parameters->delete_all();
         $this->_parameters->add("msg", $mensaje);
-        $this->_parameters->add("codsede", $obj->get_codautor());
+        $this->_parameters->add("codigo", $obj->get_codautor());
 
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
@@ -92,7 +92,7 @@ class Modules_Biblio_Controllers_AutoresController {
         }
         $this->_parameters->delete_all();
         $this->_parameters->add("msg", $mensaje);
-        $this->_parameters->add("codsede", $obj->get_codautor());
+        $this->_parameters->add("codigo", $obj->get_codautor());
 
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];

@@ -40,7 +40,7 @@ $Face->add_navigation("Listado de Clasficacion Biblioteca", "#");
 
 
 //$registros = $facadeEdificios->load_all($rsNumRows, $limit_numrows, $page, $Data);
-$registros = $facade->load_all($rsNumRows, $limit_numrows, $page);
+$registros = $facade->load_all($rsNumRows, $limit_numrows, $page,$Data);
 $paginador = new Moon2_Pagination_Pager($rsNumRows, $limit_numrows, $page, $parametros);
 
 echo $Face->open();

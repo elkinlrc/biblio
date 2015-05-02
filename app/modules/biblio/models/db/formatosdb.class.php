@@ -1,12 +1,12 @@
 <?php
 
-class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
+class Modules_Biblio_ModelDb_Formatosdb extends Moon2_DBmanager_PDO{
     
     
     public function __construct() {
         parent::__construct();   //herede todo del padre
-        $this->_table = "autores";
-        $this->_Pkey["key"] = "codautor";
+        $this->_table = "formatos";
+        $this->_Pkey["key"] = "codformato";
         $this->_Pkey ["value"] = 0;
         $this->_sequence = $this->_table . "_" . $this->_Pkey["key"] . "_seq";
     }
@@ -14,15 +14,15 @@ class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
     
      public function load_all(&$rsNumRows, $limit_numrows, $page, $Data) {
         
-         
         
         $where=" ";
-        $from = "FROM ".$this->_table." a ";
+        $from = "FROM ".$this->_table." f ";
         if(isset($Data["busqueda"])){
             $where = $this->get_where($Data["busqueda"]);
         }
         $order = " ";
-                        
+
+                   
 
         $sql_num = " SELECT COUNT(*) ";
         $sql_num.=$from;
@@ -30,7 +30,7 @@ class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
 
 
         $rsNumRows = $this->GetOne($sql_num);
-        $sql_registros = "SELECT a.".$this->_Pkey["key"].", a.nombre ";
+        $sql_registros = "SELECT f.".$this->_Pkey["key"].", f.nombre,f descripcion ";
         $sql_registros.=$from;
         $sql_registros.=$where;
         $sql_registros.=$order;

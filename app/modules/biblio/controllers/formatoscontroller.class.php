@@ -1,6 +1,6 @@
 <?php
 
-class Modules_Biblio_Controllers_ClasificacionesController {
+class Modules_Biblio_Controllers_FormatosController {
       
 
     private $_dom;
@@ -8,7 +8,7 @@ class Modules_Biblio_Controllers_ClasificacionesController {
     private $_parameters;
     private $_pathConfig;
     private $_action;
-    public  $_module="clasificaciones";
+    public  $_module="formatos";
 
     public function __construct($param, $dom, $path) {
       
@@ -17,9 +17,12 @@ class Modules_Biblio_Controllers_ClasificacionesController {
         $action = $this->_action;
         $rc = new ReflectionClass("Modules_Biblio_Controllers_".$this->_module."Controller");
         if ($rc->hasMethod($action)) {
+         
             $this->_dom = $dom;
             $this->_pathConfig = $path;
             $this->$action();
+          
+               
         } else {
             echo "Método no encontrado";
             $this->_parameters->show();
@@ -29,16 +32,17 @@ class Modules_Biblio_Controllers_ClasificacionesController {
     }
 
     private function crear() {
-        $obj = new Modules_Biblio_Model_Clasificaciones();
+        $obj = new Modules_Biblio_Model_Formatos();
         $objo = $this->_parameters->set_object($obj);
-        $facade = new Modules_Biblio_Model_ClasificacionesFacade();
+        $facade = new Modules_Biblio_Model_FormatosFacade();
+        
         $mensaje = 31;
         if ($facade->add($objo)) {
             $mensaje = 11;
         }
         $this->_parameters->delete_all();
         $this->_parameters->add("msg", $mensaje);
-        $this->_parameters->add("codclasificacion", $obj->get_codclasificacion());
+        $this->_parameters->add("codformato", $obj->get_codformato());
 
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
@@ -59,16 +63,17 @@ class Modules_Biblio_Controllers_ClasificacionesController {
     }
 
     private function eliminar() {
-        $obj = new Modules_Biblio_Model_Clasificaciones();
-        $objo = $this->_parameters->set_object($obj);
-        $facade = new Modules_Empresa_Model_Sedesfacade();
+        $obj = new Modules_Biblio_Model_Formatos();
+        $objo = $this->_parameters->set_object($objo);
+        $facade = new Modules_Biblio_Model_Formatosfacade();
         $mensaje = 32;
         if ($facade->delete($objo)) {
             $mensaje = 12;
         }
         $this->_parameters->delete_all();
         $this->_parameters->add("msg", $mensaje);
-        $this->_parameters->add("codclasificacion", $obj->get_codclasificacion());
+        $this->_parameters->add("codigo", $obj->get_codformato());
+
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
         $vista = "/biblio/views/".$this->_module."/index.php?";
@@ -76,16 +81,19 @@ class Modules_Biblio_Controllers_ClasificacionesController {
     }
 
     private function editar() {
-        $obj = new Modules_Biblio_Model_Clasificaciones();
+        $obj = new Modules_Biblio_Model_Autores();
         $objo = $this->_parameters->set_object($obj);
-        $facade = new Modules_Biblio_Model_ClasificacionesFacade();
+        $facade = new Modules_Biblio_Model_AutoresFacade();
         $mensaje = 32;
         if ($facade->update($objo)) {
+
+        
             $mensaje = 12;
         }
         $this->_parameters->delete_all();
         $this->_parameters->add("msg", $mensaje);
-        $this->_parameters->add("codclasificacion", $obj->get_codclasificacion());
+        $this->_parameters->add("codsede", $obj->get_codautor());
+
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
         $vista = "/biblio/views/".$this->_module."/editar.php?";
@@ -96,4 +104,3 @@ class Modules_Biblio_Controllers_ClasificacionesController {
 
 }
 
-?>

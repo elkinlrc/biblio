@@ -24,7 +24,7 @@ $Data=array();
 $Data["busqueda"][$opcionBusqueda]=$palabraBusqueda;
 
 //$facadeAutores = new Modules_Empresa_Model_Edificiosfacade;
-$facade = new Modules_Biblio_Model_AutoresFacade();
+$facade = new Modules_Biblio_Model_FormatosFacade();
 $facade->add_searchField("1","a.codautor");
 $facade->add_searchField("2","a.nombre");
 //$facadeEdificios->add_searchField("3","e.edificio");
