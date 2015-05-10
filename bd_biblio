@@ -1,0 +1,12 @@
+﻿-- Database: bd_biblio
+
+-- DROP DATABASE bd_biblio;
+
+CREATE DATABASE bd_biblio
+  WITH OWNER = user_java
+       ENCODING = 'UTF8'
+       TABLESPACE = pg_default
+       LC_COLLATE = 'es_CO.utf8'
+       LC_CTYPE = 'es_CO.utf8'
+       CONNECTION LIMIT = -1;
+

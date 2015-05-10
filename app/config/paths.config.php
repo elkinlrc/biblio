@@ -16,6 +16,7 @@ $PATH_CONFIG["TRAGRA_CONSIGNA"] = $PATH_CONFIG["WEBFILES"]."/trabajosgrado/consi
 
 
 // Basic paths for the framework
+$PATH_CONFIG["ROOT"]["images"]      = $PATH_CONFIG["APP"]."images";
 $PATH_CONFIG["ROOT"]["moon"]        = $PATH_CONFIG["APP"]."moon2";
 $PATH_CONFIG["ROOT"]["search"]      = $PATH_CONFIG["APP"]."moon2/search";
 $PATH_CONFIG["ROOT"]["modules"]     = $PATH_CONFIG["APP"]."modules";

@@ -8,21 +8,27 @@ if (!isset($id_security)) {
     <div class="container">
         <div class="row">
             <div class="span12">
-                <div class="widget stacked">
-                    <div class="widget-header">
-                        <i class="icon-th-large"></i>
-                        <h3>Buscar libros</h3>
-                    </div>
-                    <div class="widget-content">
+                
+                    
+                    
+                        
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
                             <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
                             <input type="hidden" id="action" name="action" value="crearAutores" />
                             <input type="hidden" id="controller" name="controller" value="Biblio/AutoresController" />
-                            <input type="text" id="buscado" name="buscador" value="" />
+                            <img src="<?=$PATH_CONFIG["ROOT"]["images"];?>/LogoHorizontal-UTS.png" />
+                            <input type="text" class="input-xxlarge" style="width: 530px;" id="buscado" name="buscador" value="" />
+                            <input type="submit" class=" btn btn-success" value="Buscar">
+                            <ul>
+                                <li>Busqueda Basica</li>
+                                <li>Busqueda Avanzada</li>
+                            </ul>
                           
                         </form>
-                    </div> <!-- /widget-content -->
-                </div> <!-- /widget stacked -->
+                    
+                    
+                    
+                
             </div> <!-- /span12 -->
         </div> <!-- /row -->
     </div> <!-- /container -->
