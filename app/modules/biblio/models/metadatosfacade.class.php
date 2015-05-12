@@ -1,11 +1,11 @@
 <?php
 
-class Modules_Biblio_Model_FormatosFacade implements Moon2_Interfaces_MandatoryModel{
+class Modules_Biblio_Model_MetadatosFacade implements Moon2_Interfaces_MandatoryModel{
     
     private $_objdb;
     
     public function __construct() {
-        $this->_objdb= new Modules_Biblio_ModelDb_Formatosdb();
+        $this->_objdb= new Modules_Biblio_ModelDb_Metadatosdb();
     }
 
     public function add($obj) {
@@ -31,8 +31,9 @@ class Modules_Biblio_Model_FormatosFacade implements Moon2_Interfaces_MandatoryM
     public function update($obj) {
         return $this->_objdb->update($obj);
     }
-    public function combo(){
-        return $this->_objdb->combo();
+    public function loadMetadatosLibros(){
+        return $this->_objdb->loadMetadatosLibros();
+        
     }
 
 }

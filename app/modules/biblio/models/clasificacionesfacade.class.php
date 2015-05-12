@@ -31,6 +31,10 @@ class Modules_Biblio_Model_ClasificacionesFacade implements Moon2_Interfaces_Man
     public function update($obj) {
         return $this->_objdb->update($obj);
     }
+    public function combo(){
+        return $this->_objdb->combo();
+        
+    }
 
 }
 

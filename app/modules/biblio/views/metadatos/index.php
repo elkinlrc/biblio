@@ -14,10 +14,8 @@ $palabraBusqueda=$parametros->get_parameter("Sw","");
 
 $formulario=new Moon2_Forms_Form();
 $arr_busqueda=array();
-$arr_busqueda[1]="Codigo";//el numero es el valor del value
-
-$arr_busqueda[2]="Nombre";
-$arr_busqueda[3]="Subtitulo";
+$arr_busqueda[1]="codigo";//el numero es el valor del value
+$arr_busqueda[2]="etiqueta";
 
 
 
@@ -25,28 +23,26 @@ $rsNumRows=0;
 $Data=array();
 $Data["busqueda"][$opcionBusqueda]=$palabraBusqueda;
 
-
-$facade = new Modules_Biblio_Model_LibrosFacade();
-$facade->add_searchField("1","l.codlibro");
-$facade->add_searchField("2","l.titulo");
-$facade->add_searchField("2","l.subtitulo");
+//$facadeAutores = new Modules_Empresa_Model_Edificiosfacade;
+$facade = new Modules_Biblio_Model_MetadatosFacade();
+$facade->add_searchField("1","m.codmetadato");
+$facade->add_searchField("2","m.etiqueta");
 //$facadeEdificios->add_searchField("3","e.edificio");
 
 
 $Face = new Moon2_ViewManager_Controller();
 $Face->set_sysmenu(TRUE);
 $Face->set_type("OUTSIDE");
-$Face->set_name("Listado de Clasificación ");
+$Face->set_name("Listar Meta columnas  ");
 
 $Face->add_navigation("Inicio", "index.php");
-$Face->add_navigation("Listado de Clasficacion Biblioteca", "#");
+$Face->add_navigation("Listar Metacolumnas libros", "#");
 
 
-//$registros = $facadeEdificios->load_all($rsNumRows, $limit_numrows, $page, $Data);
+
 $registros = $facade->load_all($rsNumRows, $limit_numrows, $page,$Data);
 $paginador = new Moon2_Pagination_Pager($rsNumRows, $limit_numrows, $page, $parametros);
 
 echo $Face->open();
 require($Face->getView());
 echo $Face->close();
-?>

@@ -18,7 +18,7 @@ if (!isset($id_security)) {
                          <form name="formulario" id="formulario" method="POST" action="traceo.php" onsubmit="javascript:return checkform('formulario');">
                                 <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false" />
                                 <input type="hidden" id="action" name="action" value="buscar" />
-                                <input type="hidden" id="controller" name="controller" value="biblio/clasificacionescontroller" />
+                                <input type="hidden" id="controller" name="controller" value="biblio/metadatoscontroller" />
                                 
 
                                 <table class="table table-striped">
@@ -26,7 +26,7 @@ if (!isset($id_security)) {
                                     <tr>
                                         <td class="danger">&nbsp;</td>
                                         <td class="danger"><?php
-                                        echo $formulario->addObject("RadioHorizontal", "So", $arr_busqueda, $opcionBusqueda, "Codigo");
+                                        echo $formulario->addObject("RadioHorizontal", "So", $arr_busqueda, $opcionBusqueda, "");
                                         ?>
                                         </td>  
                                         <td class="danger"></td>
@@ -56,17 +56,24 @@ if (!isset($id_security)) {
                             <thead>
                                 <tr>
                                     <th width="20%">Código </th>
-                                    <th width="50%" style="text-align: center">Nombre </th>
-                                     <th width="50%" style="text-align: center">Nombre </th>
+                                    <th width="50%" style="text-align: center">Columna </th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php
                                 foreach ($registros as $indice => $campo){
+                                    
+                                    $parametros->add("action", "eliminar");
+                                    $parametros->add("controller", "Modules_Biblio_Controllers_MetadatosController");
+                                    $parametros->add("codigo", $campo["codmetadato"]);
+                                    $parametros->add("SECURITY_ID", "FALSE");
+                                    $url_actualizar = $parametros->keyGen();
+                                    
                                     echo "<tr>";
-                                    echo "<td><a href=\"editar.php\">".$campo["codlibro"]."</a></td>";
-                                    echo "<td>".$campo["titulo"]."</td>";
-                                    echo "<td>".$campo["subtitulo"]."</td>";
+                                    echo "<td><a href=\"editar.php?{$url_actualizar}\">".$campo["codmetadato"]."</a></td>";
+                                    echo "<td>".$campo["etiqueta"]."</td>";
+                                    
                                     echo "</tr>";
                                 }
                                 ?>

@@ -17,10 +17,10 @@ $Face->add_navigation("Inicio", "index.php");
 $Face->add_navigation("Editar ", "#");
 
 
-$obj = new Modules_Biblio_Model_Autores();
-$obj->set_codautor($codigo);
+$obj = new Modules_Biblio_Model_Metadatos();
+$obj->set_codmetadato($codigo);
 
-$facade = new Modules_Biblio_Model_AutoresFacade();
+$facade = new Modules_Biblio_Model_MetadatosFacade();
 $obj = $facade->loadOne($obj);
 
 //Publicacion de mensajes. Mostrar en domains los mensajes configurados.

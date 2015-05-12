@@ -9,7 +9,7 @@ $codigo = $parametros->get_parameter("codigo", 0);
 
 //***********************************************
 $Face = new Moon2_ViewManager_Controller();
-$Face->set_sysmenu(false);
+$Face->set_sysmenu(TRUE);
 $Face->set_type("OUTSIDE");
 $Face->set_name("Crear");
 

@@ -17,8 +17,21 @@ if (!isset($id_security)) {
                             <input type="hidden" id="action" name="action" value="buscar" />
                             <input type="hidden" id="controller" name="controller" value="Biblio/LibrosController" />
                             <img src="<?=$PATH_CONFIG["ROOT"]["images"];?>/LogoHorizontal-UTS.png"  />
-                            <input type="text" class="input-xxlarge" style="width: 530px;" id="buscado" name="buscador"  />
+                            <div class="input-append">
+                            <input type="text" class="input-xxlarge form-control" style="width: 530px;" id="buscado" name="buscador"  />
                             <input type="submit" class=" btn btn-success" value="Buscar">
+                            <div class="btn-group">
+                                <button class="btn">Opciones</button>
+                                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                                    <span class="caret">prueba</span>
+                            </button>
+  
+</div>
+</div>
+                            
+                            
+ 
+                            
                             <ul>
                                 <li>Busqueda Basica</li>
                                 <li>Busqueda Avanzada</li>

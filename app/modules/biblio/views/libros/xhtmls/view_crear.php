@@ -29,9 +29,46 @@ if (!isset($id_security)) {
                                 </thead>
                                 <tbody> 
                                     <tr>
-                                        <td>Nombre</td>
+                                        <td>titulo</td>
                                         <td><input type="text" id="nombre" name="nombre" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
+                                    <tr>
+                                        <td>Subtitulo</td>
+                                        <td><input type="text" id="nombre" name="nombre" class="form-control validate[required, minSize[4]]" size="30"/></td>
+                                    </tr>
+                                      <tr>
+                                          <td>Clasificacion</td>
+                                          <td>
+                                    <?php
+                                        echo $formulario->addObject("MenuList", "codclasificacion",$comboClasificacion, "", "", "");
+                                         ?>
+                                          </td>
+                                      </tr>
+                                      <tr>
+                                          <td>Formato del libros</td>
+                                          <td>
+                                    <?php
+                                        echo $formulario->addObject("MenuList", "codformato",$comboFormatos, "", "", "");
+                                         ?>
+                                          </td>
+                                      </tr>
+                                      <?php
+                                foreach ($registrosMetadatos as $indice => $campo){
+                                    
+                                    $lbminimo="";
+                                    $minimo=$campo["minimo"];
+                                    if($minimo>0 ){
+                                        
+                                        $lbminimo="minSize[".$minimo."]";
+                                        }
+                                    
+                                    echo "<tr>";
+                                    echo "<td>".$campo["etiqueta"]."</td>";
+                                    echo "<td><input type=\"text\" id=\"".$campo["etiqueta"]."\" name=\"".$campo["etiqueta"]."\" class=\"form-control validate[required, $lbminimo]\" size=\"30\"/></td>";
+                                    
+                                    echo "</tr>";
+                                }
+                                ?>
                                     
                                     <tr>
                                         <td colspan="2"><input type="submit" value="Crear Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
