@@ -8,12 +8,14 @@ class Modules_Biblio_Controllers_LibrosController {
     private $_parameters;
     private $_pathConfig;
     private $_action;
-    public  $_module="autores";
+    public  $_module="libros";
+    
 
     public function __construct($param, $dom, $path) {
-      
+        
         $this->_parameters = $param;
         $this->_action = $param->get_parameter("action", "");
+        
         $action = $this->_action;
         $rc = new ReflectionClass("Modules_Biblio_Controllers_".$this->_module."Controller");
         if ($rc->hasMethod($action)) {
@@ -33,17 +35,34 @@ class Modules_Biblio_Controllers_LibrosController {
 
     private function crear() {
         $obj = new Modules_Biblio_Model_Libros();
-        $objo = $this->_parameters->set_object($obj);
+        $obj = $this->_parameters->set_object($obj);
         $facade = new Modules_Biblio_Model_LibrosFacade();
-        
+        $array=$this->_parameters->get_parameter("valor", "");
         $mensaje = 31;
-        if ($facade->add($objo)) {
+        if ($facade->add($obj)) {
             $mensaje = 11;
+            foreach ($array as $key => $value) {
+              
+                /**
+                 * si el metadot tiene algun valor procedemos a guardarlo
+                 * con el fin de no guardar campos vacios
+                 */
+                if(!empty($value)){
+                    $metadatos = new Modules_Biblio_Model_MetadatosLibros();
+                    $metadatos->set_codlibro($obj->get_codlibro());
+                    $metadatos->set_codmetadato($key);
+                    $metadatos->set_valor($value);
+                    $metadatosfacade= new Modules_Biblio_Model_MetadatoslibrosFacade();
+                    $metadatosfacade->add($metadatos);
+                }
+            }
+          
         }
+        
+        
         $this->_parameters->delete_all();
         $this->_parameters->add("msg", $mensaje);
         $this->_parameters->add("codlibro", $obj->get_codlibro());
-
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];
         $vista = "/biblio/views/".$this->_module."/crear.php?";

@@ -41,6 +41,14 @@ if (!isset($id_security)) {
                                         <td>Maximo</td>
                                         <td><input type="number" id="maximo" name="maximo" class="form-control" size="30" value="<?php echo $obj->get_maximo(); ?>"/></td>
                                     </tr>
+                                     <tr>
+                                        <td>Requerido</td>
+                                        <td>
+                                    <?php
+                                        echo $formulario->addObject("MenuList", "requerido",$DOM["REQ"],$obj->get_requerido(), "", "");
+                                         ?>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td colspan="2"><input type="submit" value="Actualizar Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
                                     </tr>

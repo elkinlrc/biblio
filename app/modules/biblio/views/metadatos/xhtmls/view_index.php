@@ -57,7 +57,9 @@ if (!isset($id_security)) {
                                 <tr>
                                     <th width="20%">Código </th>
                                     <th width="50%" style="text-align: center">Columna </th>
-                                    
+                                     <th width="10%" style="text-align: center">Minimo</th>
+                                      <th width="10%" style="text-align: center">Maximo </th>
+                                       <th width="10%" style="text-align: center">Requerido </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,7 +75,9 @@ if (!isset($id_security)) {
                                     echo "<tr>";
                                     echo "<td><a href=\"editar.php?{$url_actualizar}\">".$campo["codmetadato"]."</a></td>";
                                     echo "<td>".$campo["etiqueta"]."</td>";
-                                    
+                                    echo "<td>".$campo["minimo"]."</td>";
+                                    echo "<td>".$campo["maximo"]."</td>";
+                                    echo "<td>".$campo["requerido"]."</td>";
                                     echo "</tr>";
                                 }
                                 ?>

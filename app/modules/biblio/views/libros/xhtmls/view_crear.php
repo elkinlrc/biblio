@@ -17,7 +17,7 @@ if (!isset($id_security)) {
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
                             <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
                             <input type="hidden" id="action" name="action" value="crear" />
-                            <input type="hidden" id="controller" name="controller" value="Biblio/clasificacionesController" />
+                            <input type="hidden" id="controller" name="controller" value="Biblio/LibrosController" />
                             <table class="table table-bordered table-highlight">
                                 <thead>
                                     <tr>
@@ -30,11 +30,11 @@ if (!isset($id_security)) {
                                 <tbody> 
                                     <tr>
                                         <td>titulo</td>
-                                        <td><input type="text" id="nombre" name="nombre" class="form-control validate[required, minSize[4]]" size="30"/></td>
+                                        <td><input type="text" id="titulo" name="titulo" class="form-control validate[required, minSize[4]]" size="30" value=""/></td>
                                     </tr>
                                     <tr>
                                         <td>Subtitulo</td>
-                                        <td><input type="text" id="nombre" name="nombre" class="form-control validate[required, minSize[4]]" size="30"/></td>
+                                        <td><input type="text" id="subtitulo" name="subtitulo" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
                                       <tr>
                                           <td>Clasificacion</td>
@@ -56,15 +56,20 @@ if (!isset($id_security)) {
                                 foreach ($registrosMetadatos as $indice => $campo){
                                     
                                     $lbminimo="";
+                                    $lbrequerido="";
                                     $minimo=$campo["minimo"];
+                                    $requerido=$campo["requerido"];
                                     if($minimo>0 ){
                                         
-                                        $lbminimo="minSize[".$minimo."]";
-                                        }
+                                          $lbminimo="minSize[".$minimo."]";
+                                     }
+                                     if($requerido=="si"){
+                                         $lbrequerido="required";
+                                     }
                                     
                                     echo "<tr>";
                                     echo "<td>".$campo["etiqueta"]."</td>";
-                                    echo "<td><input type=\"text\" id=\"".$campo["etiqueta"]."\" name=\"".$campo["etiqueta"]."\" class=\"form-control validate[required, $lbminimo]\" size=\"30\"/></td>";
+                                    echo "<td><input type=\"text\" id=\"".$campo["etiqueta"]."\" name=\"valor[".$campo["codmetadato"]."]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td>";
                                     
                                     echo "</tr>";
                                 }

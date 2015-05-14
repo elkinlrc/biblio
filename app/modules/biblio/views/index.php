@@ -10,6 +10,10 @@ $Face->set_name("Bilioteca");
 
 $Face->add_navigation("Inicio", "#");
 
+$facadeMetadatos = new Modules_Biblio_Model_MetadatosFacade();
+$registrosMetadatos = $facadeMetadatos->loadMetadatosLibros();
+
+
 echo $Face->open();
 require($Face->getView());
 echo $Face->close();

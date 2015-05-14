@@ -1,12 +1,12 @@
 <?php
 
-class Modules_Biblio_ModelDb_Metadatosdb extends Moon2_DBmanager_PDO{
+class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
     
     
     public function __construct() {
         parent::__construct();   //herede todo del padre
-        $this->_table = "metadatos";
-        $this->_Pkey["key"] = "codmetadato";
+        $this->_table = "autoreslibros";
+        $this->_Pkey["key"] = "codautor,codlibro";
         $this->_Pkey ["value"] = 0;
         $this->_sequence = $this->_table . "_" . $this->_Pkey["key"] . "_seq";
     }
@@ -17,7 +17,7 @@ class Modules_Biblio_ModelDb_Metadatosdb extends Moon2_DBmanager_PDO{
          
         
         $where=" ";
-        $from = "FROM ".$this->_table." m ";
+        $from = "FROM ".$this->_table." a ";
         if(isset($Data["busqueda"])){
             $where = $this->get_where($Data["busqueda"]);
         }
@@ -30,7 +30,7 @@ class Modules_Biblio_ModelDb_Metadatosdb extends Moon2_DBmanager_PDO{
 
 
         $rsNumRows = $this->GetOne($sql_num);
-        $sql_registros = "SELECT m.".$this->_Pkey["key"].", m.etiqueta,m.minimo,m.maximo,m.requerido ";
+        $sql_registros = "SELECT a.".$this->_Pkey["key"].", a.nombre ";
         $sql_registros.=$from;
         $sql_registros.=$where;
         $sql_registros.=$order;
@@ -41,17 +41,10 @@ class Modules_Biblio_ModelDb_Metadatosdb extends Moon2_DBmanager_PDO{
     }
     
     public function combo() {
-        $sql = "SELECT ".$this->_Pkey["key"].",etiqueta ";
+        $sql = "SELECT ".$this->_Pkey["key"].",nombre ";
         $sql.="FROM ". $this->_table;
         $Arraybanco = $this->GetAssoc($sql);
         return $Arraybanco;
-    }
-    public function loadMetadatosLibros(){
-        $sql="select * from ". $this->_table;
-        
-        return $this->GetAll($sql);
-        
-        
     }
     
     

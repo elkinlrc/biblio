@@ -40,7 +40,14 @@ if (!isset($id_security)) {
                                         <td>Maximo</td>
                                         <td><input type="number" id="maximo" name="maximo" class="form-control" value="0" size="30"/></td>
                                     </tr>
-                                    
+                                    <tr>
+                                        <td>Requerido</td>
+                                        <td>
+                                    <?php
+                                        echo $formulario->addObject("MenuList", "requerido",$DOM["REQ"], "", "", "");
+                                         ?>
+                                        </td>
+                                    </tr>
                                     <tr>
                                         <td colspan="2"><input type="submit" value="Crear Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
                                     </tr>

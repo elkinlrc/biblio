@@ -56,6 +56,10 @@ $DOM["ID_SISTEMA"]["ODAc"] = 4;
 $DOM["IF"][1] = "Si";
 $DOM["IF"][2] = "No";
 
+$DOM["REQ"]['si'] = "Si";
+$DOM["REQ"]['no'] = "No";
+
+
 $DOM["NIVEL"]["Avanzado"] = "Avanzado";
 $DOM["NIVEL"]["Intermedio"] = "Intermedio";
 $DOM["NIVEL"]["Básico"] = "Básico";

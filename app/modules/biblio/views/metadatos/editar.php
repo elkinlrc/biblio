@@ -23,6 +23,7 @@ $obj->set_codmetadato($codigo);
 $facade = new Modules_Biblio_Model_MetadatosFacade();
 $obj = $facade->loadOne($obj);
 
+$formulario= new Moon2_Forms_Form();
 //Publicacion de mensajes. Mostrar en domains los mensajes configurados.
 $Face->floating_message($mensaje, 11, "Exito", "Todo bien Creado");
 $Face->floating_message($mensaje, 31, "Error", "Algo mal");

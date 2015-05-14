@@ -17,7 +17,7 @@ class  Modules_Biblio_Model_Libros {
     private $_titulo;
     private $_subtitulo;
     private $_codclasificacion;
-    private $_formato;
+    private $_codformato;
     
     
     
@@ -41,9 +41,7 @@ class  Modules_Biblio_Model_Libros {
         return $this->_codclasificacion;
     }
 
-    function get_formato() {
-        return $this->_formato;
-    }
+
 
     function set_codlibro($_codlibro) {
         $this->_codlibro = $_codlibro;
@@ -61,9 +59,15 @@ class  Modules_Biblio_Model_Libros {
         $this->_codclasificacion = $_codclasificacion;
     }
 
-    function set_formato($_formato) {
-        $this->_formato = $_formato;
+    function get_codformato() {
+        return $this->_codformato;
     }
+
+    function set_codformato($_codformato) {
+        $this->_codformato = $_codformato;
+    }
+
+
 
 
     

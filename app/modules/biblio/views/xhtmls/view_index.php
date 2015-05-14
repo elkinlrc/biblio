@@ -27,6 +27,7 @@ if (!isset($id_security)) {
                             </button>
   
 </div>
+                           
 </div>
                             
                             
@@ -34,15 +35,32 @@ if (!isset($id_security)) {
                             
                             <ul>
                                 <li>Busqueda Basica</li>
-                                <li>Busqueda Avanzada</li>
+                                <li><a href="#" id="bs-avanzada">Busqueda Avanzada</a></li>
                             </ul>
                           
-                        </form>
+                 
+                            <div id="busqueda-avanzada">
+                <table>
+                <?php
+                      foreach ($registrosMetadatos as $indice => $campo){
+                                    
+                                   
+                                    
+                                    echo "<tr>";
+                                    echo "<td>".$campo["etiqueta"]."</td>";
+                                    echo "<td><input type=\"text\" id=\"".$campo["etiqueta"]."\" name=\"".$campo["etiqueta"]."\" class=\"form-control\"  size=\"30\"/></td>";
+                             
+                                    echo "</tr>";
+                                }
+                                ?>
+                            </table>    
+                                </div> 
                     
-                    
-                    
-                
+                </form>
             </div> <!-- /span12 -->
         </div> <!-- /row -->
     </div> <!-- /container -->
 </div> <!-- /main -->
+<script type="text/javascript">
+    
+</script>

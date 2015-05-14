@@ -57,7 +57,8 @@ if (!isset($id_security)) {
                                 <tr>
                                     <th width="20%">Código </th>
                                     <th width="50%" style="text-align: center">Nombre </th>
-                                     <th width="50%" style="text-align: center">Nombre </th>
+                                     <th width="50%" style="text-align: center">Subtitulo </th>
+                                       <th width="50%" style="text-align: center">Copia </th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,6 +68,7 @@ if (!isset($id_security)) {
                                     echo "<td><a href=\"editar.php\">".$campo["codlibro"]."</a></td>";
                                     echo "<td>".$campo["titulo"]."</td>";
                                     echo "<td>".$campo["subtitulo"]."</td>";
+                                    echo "<td><a href='crear.php'>nuevo libro</a></td>";
                                     echo "</tr>";
                                 }
                                 ?>
