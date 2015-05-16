@@ -18,7 +18,7 @@ if (!isset($id_security)) {
                          <form name="formulario" id="formulario" method="POST" action="traceo.php" onsubmit="javascript:return checkform('formulario');">
                                 <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false" />
                                 <input type="hidden" id="action" name="action" value="buscar" />
-                                <input type="hidden" id="controller" name="controller" value="biblio/clasificacionescontroller" />
+                                <input type="hidden" id="controller" name="controller" value="biblio/libroscontroller" />
                                 
 
                                 <table class="table table-striped">

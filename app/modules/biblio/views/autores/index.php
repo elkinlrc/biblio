@@ -32,7 +32,7 @@ $facade->add_searchField("2","a.nombre");
 
 $Face = new Moon2_ViewManager_Controller();
 $Face->set_sysmenu(true);
-$Face->set_type("OUTSIDE");
+$Face->set_type("INSIDE");
 $Face->set_name("Listar Autores ");
 
 $Face->add_navigation("Inicio", "index.php");

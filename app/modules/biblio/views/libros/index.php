@@ -35,7 +35,8 @@ $facade->add_searchField("2","l.subtitulo");
 
 $Face = new Moon2_ViewManager_Controller();
 $Face->set_sysmenu(TRUE);
-$Face->set_type("OUTSIDE");
+//$Face->set_type("OUTSIDE");
+$Face->set_type("INSIDE");
 $Face->set_name("Listado de Clasificación ");
 
 $Face->add_navigation("Inicio", "index.php");

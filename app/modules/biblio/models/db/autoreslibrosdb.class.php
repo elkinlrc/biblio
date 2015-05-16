@@ -1,12 +1,12 @@
 <?php
 
-class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
+class Modules_Biblio_ModelDb_Autoreslibrosdb extends Moon2_DBmanager_PDO{
     
     
     public function __construct() {
         parent::__construct();   //herede todo del padre
         $this->_table = "autoreslibros";
-        $this->_Pkey["key"] = "codautor,codlibro";
+        $this->_Pkey["key"] = "codautoreslibros";
         $this->_Pkey ["value"] = 0;
         $this->_sequence = $this->_table . "_" . $this->_Pkey["key"] . "_seq";
     }

@@ -35,6 +35,7 @@ $path_root = str_replace($path_conf, "", $path_root);
 //[4] Settings path includes - Linux or Windows
 $Includes = "";
 $PATH_CONFIG = array();
+
 if (preg_match("/Win/i",$_SERVER["SERVER_SOFTWARE"])){
     $PATH_CONFIG["APP"] = "/".$path_root;
     $separador = ";";
@@ -55,8 +56,9 @@ if (preg_match("/Win/i",$_SERVER["SERVER_SOFTWARE"])){
 
 //[5] Initializing include path
 ini_set("include_path", $Includes);
-
-
+//echo "<pre>";
+//print_r($Includes);
+//echo "</pre>";
 //[6] Configuration of headers
 header("Content-type: text/html; charset=utf-8");
 header ("Cache-Control: no-store, no-cache, must-revalidate, post-check=0, pre-check=0");
