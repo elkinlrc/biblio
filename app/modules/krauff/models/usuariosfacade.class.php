@@ -54,10 +54,6 @@ public function get_functionalities($id, $parentId){
     return $this->_userDB->get_functionalities($id, $parentId);
 }
 
-public function combotablas(){
-    return $this->_userDB->combotablas();
-}
-
 public function combousuarios(){
     return $this->_userDB->combousuarios();
 }

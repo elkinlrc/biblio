@@ -1,7 +1,7 @@
 <?php
 //Inclusiones obligatorias, primero el FrameWork y segundo el identificador de seguridad
 require("../../../config/config.inc.php");
-$DOM["SECURITY_ID"] = array("MNTO_USU");
+$DOM["SECURITY_ID"] = array("CONF_FUN");
 
 
 //Carga el sistema de seguridad

@@ -12,23 +12,6 @@ $Face->set_sysmenu(TRUE);
 $Face->set_type("OUTSIDE");
 $Face->set_name("Crear");
 
-
-$facadeMetadatos = new Modules_Biblio_Model_MetadatosFacade();
-$registrosMetadatos = $facadeMetadatos->loadMetadatosLibros();
-
-$facadeClasificacion = new Modules_Biblio_Model_ClasificacionesFacade();
-$comboClasificacion = $facadeClasificacion->combo();
-
-$facadeFormatos= new Modules_Biblio_Model_FormatosFacade();
-$comboFormatos = $facadeFormatos->combo();
-
-$facadeSedes= new Modules_Biblio_Model_SedesFacade();
-$combosedes = $facadeSedes->combo();
-
-
-
-$formulario= new Moon2_Forms_Form();
-
 $Face->add_navigation("Inicio", "index.php");
 $Face->add_navigation("Crear ", "#");
 

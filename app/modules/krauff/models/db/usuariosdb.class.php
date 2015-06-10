@@ -12,15 +12,13 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
 
     public function validate($user, $pass) {
         $parameters = array($user, $pass);
-        $sql = "SELECT u.codusuario, u.codperfil, u.nombreusuario, (u.nombres) as nombrecompleto, p.nombreperfil ";
-        $sql.="FROM {$this->_table} u INNER JOIN perfiles p ON u.codperfil = p.codperfil  ";
-        $sql.="WHERE u.nombreusuario=? AND u.clave=?  ";
-
-        
+        $sql = "SELECT u.codusuario, u.codperfil, u.nombreusuario, (u.nombres) as nombrecompleto, p.nombreperfil, e.codempresa, e.regimen, pa.tipopos, pa.impresionfactura ";
+        $sql.="FROM {$this->_table} u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa INNER JOIN parametros pa ON e.codempresa = pa.codempresa ";
+        $sql.="WHERE u.nombreusuario=? AND u.clave=? AND u.codperfil NOT IN(3,4)";
         $row = $this->GetRow($sql, $parameters);
 
         if (!empty($row)) {
-            $key_user = $row["codusuario"] . "@" . $user . "@" . $row["nombrecompleto"] . "@" . $row["nombreperfil"] . "@" . $row["codperfil"] . "@";
+            $key_user = $row["codusuario"] . "@" . $user . "@" . $row["nombrecompleto"] . "@" . $row["nombreperfil"] . "@" . $row["codperfil"] . "@" . $row["codempresa"] . "@" . $row["regimen"] . "@" . $row["tipopos"] . "@" . $row["impresionfactura"];
             return $key_user;
         }
         return false;
@@ -36,7 +34,6 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $sql.= "    WHERE aF.codfunc = f.codpadre ";
         $sql.= ")";
         $sql.= "SELECT * FROM arbolFunc order BY orden;";
-        
         $allFunc = $this->GetAll($sql, array($id, $parentId));
 
         $UserfuncArray = $this->user_Functionalities($id);
@@ -63,7 +60,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql ="SELECT count(*) ";
+        $sql = "SELECT count(*) ";
         $sql.="FROM usuarios ";
         $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} ";
         $rsNumRows = $this->GetOne($sql);
@@ -92,7 +89,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
             return $arr;
         }
     }
-    
+
     public function load_all_admin(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
         $combo_campos = $Data["nomcampos"];
         $caja_busqueda = $Data["buscar"];
@@ -100,7 +97,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql ="SELECT count(*) ";
+        $sql = "SELECT count(*) ";
         $sql.="FROM usuarios ";
         $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} ";
         $rsNumRows = $this->GetOne($sql);
@@ -129,7 +126,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
             return $arr;
         }
     }
-    
+
     public function load_all_meseros(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
         $combo_campos = $Data["nomcampos"];
         $caja_busqueda = $Data["buscar"];
@@ -137,7 +134,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql ="SELECT count(*) ";
+        $sql = "SELECT count(*) ";
         $sql.="FROM usuarios ";
         $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} and codperfil = 1 ";
         $rsNumRows = $this->GetOne($sql);
@@ -166,15 +163,14 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
             return $arr;
         }
     }
-    
+
     public function load_all_clientes(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
         $combo_campos = $Data["nomcampos"];
         $caja_busqueda = $Data["buscar"];
         $From = "FROM {$this->_table} u";
-        $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql ="SELECT count(*) ";
+        $sql = "SELECT count(*) ";
         $sql.="FROM usuarios ";
         $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} and codperfil = 4 ";
         $rsNumRows = $this->GetOne($sql);
@@ -187,23 +183,17 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
             $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             return $arr;
         } else {
-            if ($combo_campos == "codusuario") {
-                $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.celular, u.direccion, u.tipodoc ";
-                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil = 4 and u.codusuario <> -2 ";
-                $sql.= $order;
-                $arr = $this->SelectLimit($sql, $limit_numrows, $page);
-            } else {
-                $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.celular, u.direccion, u.tipodoc ";
-                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil = 4 and u.codusuario <> -2 ";
-                $sql.= $order;
-                $arr = $this->SelectLimit($sql, $limit_numrows, $page);
-            }
+            $where = $this->get_where($Data["search"]);
+            $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.celular, u.direccion, u.tipodoc ";
+            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
+            $sql.= $where . " AND e.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 4 and u.codusuario <> -2 ";
+            $sql.= $order;
+            $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             return $arr;
         }
+        
     }
-    
+
     public function load_all_clientes2(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
         $combo_campos = $Data["nomcampos"];
         $caja_busqueda = $Data["buscar"];
@@ -211,7 +201,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql ="SELECT count(*) ";
+        $sql = "SELECT count(*) ";
         $sql.="FROM usuarios ";
         $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} and codperfil = 4 ";
         $rsNumRows = $this->GetOne($sql);
@@ -240,7 +230,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
             return $arr;
         }
     }
-    
+
     public function combousuarios() {
         $sql = "SELECT u.codusuario, (u.nombres||' '||u.primerapellido||' '||u.segundoapellido) AS nombrecliente ";
         $sql.= "FROM usuarios u INNER JOIN empresas e ON u.codempresa = e.codempresa ";
@@ -248,21 +238,13 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $funcArray = $this->GetAssoc($sql);
         return $funcArray;
     }
-    
-    public function combotablas() {
-        $sql = "SELECT column_name as llave, column_name as valor ";
-        $sql.="FROM information_schema.columns ";
-        $sql.="WHERE table_name = 'usuarios' and column_name IN ('codusuario', 'documento', 'nombres');";
-        $funcArray = $this->GetAssoc($sql);
-        return $funcArray;
-    }
-    
-     public function asignarfuncionalidades($codusuario) {
+
+    public function asignarfuncionalidades($codusuario) {
         $sql = "INSERT into rel_funcusuarios (codusuario, codfunc) select {$codusuario},codfunc FROM funcionalidades ";
         $funcArray = $this->ExecuteSql($sql);
         return $funcArray;
     }
-    
+
     public function combomeseros() {
         $sql = "SELECT u.codusuario, (u.nombres) AS nombremeseros ";
         $sql.= "FROM usuarios u ";
@@ -270,7 +252,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $funcArray = $this->GetAssoc($sql);
         return $funcArray;
     }
-    
+
     public function combomeseros2() {
         $sql = "SELECT u.codusuario ";
         $sql.= "FROM usuarios u ";
@@ -278,6 +260,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $funcArray = $this->GetOne($sql);
         return $funcArray;
     }
+
 }
 
 //End class

@@ -31,8 +31,8 @@ $FacadePerfiles = new Modules_Krauff_Model_PerfilesFacade();
 $arr_perfiles = $FacadePerfiles->comboperfiles();
 
 //Combo de Empresas
-$FacadeEmpresas = new Modules_Pizzeria_Model_EmpresasFacade();
-$arrayEmpresa = $FacadeEmpresas->combo();
+$FacadeEmpresas = new Modules_Pos_Model_EmpresasFacade();
+$arrayEmpresa = $FacadeEmpresas->combo_empresa();
 
 //Despliegue de la página en xhtml
 echo $Face->open();

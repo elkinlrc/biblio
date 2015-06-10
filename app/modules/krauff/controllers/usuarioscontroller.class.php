@@ -38,17 +38,11 @@ private function login(){
         $Usuario = new Modules_Krauff_Model_UsuariosFacade();
         $informacion_usuario = $Usuario->validate($nombreusuario, $clave);
         //var_dump($informacion_usuario);
-        
-        
         if ($informacion_usuario === false){
             $message = urlencode("Error el Usuario o el Password no Existen");
             $this->_url = $this->_path_config["QUIT"]."/response.php?msg=".$message;
             header("Location: {$this->_url}");
-             
-            exit();
-           
         }else{
-            //$cantidad=0;
             $information = explode("@", $informacion_usuario);
             $cod_usuario = $information[0];
             
@@ -62,13 +56,11 @@ private function login(){
             $AccesosFacade = new Modules_Krauff_Model_AccesosFacade();
             $AccesosFacade->add($Accesos);
             
-            //echo "cod_usuario".$cod_usuario;
-            //exit();
             $vector_funcionalidades = $Usuario->get_functionalities($cod_usuario, $this->_dom["KRAUFF"]["INITIALVALUE"]);
             $cantidad = count($vector_funcionalidades);
 
             if ($cantidad==0){
-                $message = urlencode("Usted no tiene permisos asignados");
+                $message = urlencode("You do not have components assigned");
                 $this->_url = $this->_path_config["QUIT"]."/response.php?msg=".$message;
                 header("Location: {$this->_url}");
             }else{
@@ -80,7 +72,6 @@ private function login(){
                 $_SESSION[$this->_dom["SESION2"]] = md5($informacion_usuario);
                 $_SESSION[$this->_dom["SESION3"]] = serialize($obj_funcionalidades);
                 $this->_url = $this->_path_config["MAINPAGE"]."/".$page;
-                //echo $this->_url;
                 header("Location: {$this->_url}");
             }
         }
@@ -117,7 +108,7 @@ private function crear(){
     $this->_parameters->add("msg", $msg);
     $this->_parameters->add("codusuario", $obj->get_codusuario());
     $cadenaUrl = $this->_parameters->KeyGen();
-    exit();
+   // exit();
     $this->_url = $this->_path_config["ROOT"]["modules"]."/krauff/views/usuarios_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
@@ -145,7 +136,7 @@ private function crearmesero(){
     $cadenaUrl = $this->_parameters->KeyGen();
     //exit();
 
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/Pos/views/meseros_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/meseros_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
 }
@@ -188,7 +179,7 @@ private function crearcliente(){
     $cadenaUrl = $this->_parameters->KeyGen();
    // exit();
 
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/Pos/views/clientes_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/clientes_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
 }
@@ -350,7 +341,7 @@ private function eliminarmesero(){
     $this->_parameters->add("cod", $obj->get_codusuario());
     $cadenaUrl = $this->_parameters->KeyGen();
 
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/Pos/views/meseros_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/meseros_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit();
 }
@@ -402,7 +393,7 @@ private function buscarmeseros(){
     $this->_parameters->add("buscar",$caja_busqueda);
     $cadenaUrl = $this->_parameters->KeyGen();
     
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/Pos/views/meseros_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/meseros_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
 }
@@ -418,7 +409,7 @@ private function buscarclientes(){
     $this->_parameters->add("buscar",$caja_busqueda);
     $cadenaUrl = $this->_parameters->KeyGen();
     
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/Pos/views/clientes_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/clientes_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
 }

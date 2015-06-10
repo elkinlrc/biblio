@@ -8,59 +8,89 @@ if (!isset($id_security)) {
     <div class="container">
         <div class="row">
             <div class="span12">
-                
-                    
-                    
-                        
-                        <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
-                            <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
-                            <input type="hidden" id="action" name="action" value="buscar" />
-                            <input type="hidden" id="controller" name="controller" value="Biblio/LibrosController" />
-                            <img src="<?=$PATH_CONFIG["ROOT"]["images"];?>/LogoHorizontal-UTS.png"  />
-                            <div class="input-append">
-                            <input type="text" class="input-xxlarge form-control" style="width: 530px;" id="buscado" name="buscador"  />
-                            <input type="submit" class=" btn btn-success" value="Buscar">
-                            <div class="btn-group">
-                                <button class="btn">Opciones</button>
-                                <button class="btn dropdown-toggle" data-toggle="dropdown">
-                                    <span class="caret">prueba</span>
-                            </button>
-  
-</div>
-                           
-</div>
-                            
-                            
- 
-                            
-                            <ul>
-                                <li>Busqueda Basica</li>
-                                <li><a href="#" id="bs-avanzada">Busqueda Avanzada</a></li>
-                            </ul>
-                          
-                 
-                            <div id="busqueda-avanzada">
-                <table>
-                <?php
-                      foreach ($registrosMetadatos as $indice => $campo){
+
+
+
+
+                <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
+                    <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
+                    <input type="hidden" id="action" name="action" value="buscar" />
+                    <input type="hidden" id="controller" name="controller" value="Biblio/LibrosController" />
+                    <img src="<?= $PATH_CONFIG["ROOT"]["images"]; ?>/LogoHorizontal-UTS.png"  />
+                    <input type="text" class="input-xxlarge form-control" style="width: 530px;" id="buscado" name="buscador"  value="<?=$busqueda;?>" />
+                    <input type="submit" class=" btn btn-success" value="Buscar">
+                     <ul>
+                        <li>Busqueda Basica</li>
+                        <li><a href="#" id="bs-avanzada">Busqueda Avanzada</a></li>
+                    </ul>
+
+
+                    <div id="busqueda-avanzada" style="display: none;">
+                        <table>
+                            <?php
+                            foreach ($registrosMetadatos as $indice => $campo) {
+
+
+
+                                echo "<tr>";
+                                echo "<td>" . $campo["etiqueta"] . "</td>";
+                                echo "<td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"" . $campo["etiqueta"] . "\" class=\"form-control\"  size=\"30\"/></td>";
+
+                                echo "</tr>";
+                            }
+                            ?>
+                        </table>    
+                    </div>
+
+
+
+                </form>
+                  <?php
+                        echo $paginador->showDetails();
+                        ?>
+                        <table class="table table-bordered table-hover table-responsive ">
+                            <thead>
+                                <tr>
+                                    <th  colspan="2">Resultados de Búsqueda </th>
                                     
-                                   
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php
+                                foreach ($registros as $indice => $campo){
+                                    
+                                    $parametros->add("action", "verLibro");
+                                    $parametros->add("buscador", $busqueda);
+                                    $parametros->add("controller", "Modules_Biblio_Controllers_LibrosController");
+                                    $parametros->add("codigo", $campo["codlibro"]);
+                                    $parametros->add("SECURITY_ID", "FALSE");
+                                    $url_actualizar = $parametros->keyGen();
                                     
                                     echo "<tr>";
-                                    echo "<td>".$campo["etiqueta"]."</td>";
-                                    echo "<td><input type=\"text\" id=\"".$campo["etiqueta"]."\" name=\"".$campo["etiqueta"]."\" class=\"form-control\"  size=\"30\"/></td>";
-                             
+                                    echo "<td width='10%'><img src='../../../../media/img/libro.svg'width='70px;' height='70px' class=\"img-polaroid\"></td>";
+                                    echo "<td>"
+                                    . " <dl>
+  <dt><a href=\"libro.php?{$url_actualizar}\">".$campo["titulo"]."</a></dt>
+  <dd>".$campo["subtitulo"]."</dd>
+  <dt>Milk</dt>
+  <dd>White cold drink</dd>
+</dl></td>";
+                                    
+                                    
                                     echo "</tr>";
                                 }
                                 ?>
-                            </table>    
-                                </div> 
-                    
-                </form>
+                            </tbody>
+                        </table>
+                        <?php
+                        echo $paginador->showNavigation();
+                        ?>
+                
+                
             </div> <!-- /span12 -->
         </div> <!-- /row -->
     </div> <!-- /container -->
 </div> <!-- /main -->
 <script type="text/javascript">
-    
+
 </script>

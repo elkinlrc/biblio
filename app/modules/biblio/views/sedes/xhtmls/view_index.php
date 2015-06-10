@@ -11,14 +11,14 @@ if (!isset($id_security)) {
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
-                        <h3>Listar Edificios</h3>
+                        <h3>Listar Sedes</h3>
                     </div>
                     <div class="widget-content">
                         <a href="crear.php">Nuevo</a>
                          <form name="formulario" id="formulario" method="POST" action="traceo.php" onsubmit="javascript:return checkform('formulario');">
                                 <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false" />
                                 <input type="hidden" id="action" name="action" value="buscar" />
-                                <input type="hidden" id="controller" name="controller" value="biblio/libroscontroller" />
+                                <input type="hidden" id="controller" name="controller" value="biblio/sedescontroller" />
                                 
 
                                 <table class="table table-striped">
@@ -26,7 +26,7 @@ if (!isset($id_security)) {
                                     <tr>
                                         <td class="danger">&nbsp;</td>
                                         <td class="danger"><?php
-                                        echo $formulario->addObject("RadioHorizontal", "So", $arr_busqueda, $opcionBusqueda, "Codigo");
+                                        echo $formulario->addObject("RadioHorizontal", "So", $arr_busqueda, $opcionBusqueda, "");
                                         ?>
                                         </td>  
                                         <td class="danger"></td>
@@ -57,8 +57,8 @@ if (!isset($id_security)) {
                                 <tr>
                                     <th width="20%">Código </th>
                                     <th width="50%" style="text-align: center">Nombre </th>
-                                     <th width="50%" style="text-align: center">Subtitulo </th>
-                                       <th width="50%" style="text-align: center">Copia </th>
+                                    <th width="50%" style="text-align: center">Direccion </th>
+                                    
                                 </tr>
                             </thead>
                             <tbody>
@@ -66,16 +66,16 @@ if (!isset($id_security)) {
                                 foreach ($registros as $indice => $campo){
                                     
                                     $parametros->add("action", "eliminar");
-                                    $parametros->add("controller", "Modules_Biblio_Controllers_LibrosController");
-                                    $parametros->add("codigo", $campo["codlibro"]);
+                                    $parametros->add("controller", "Modules_Biblio_Controllers_autoresController");
+                                    $parametros->add("codigo", $campo["codsede"]);
                                     $parametros->add("SECURITY_ID", "FALSE");
                                     $url_actualizar = $parametros->keyGen();
                                     
                                     echo "<tr>";
-                                    echo "<td><a href=\"editar.php?{$url_actualizar}\">".$campo["codlibro"]."</a></td>";
-                                    echo "<td>".$campo["titulo"]."</td>";
-                                    echo "<td>".$campo["subtitulo"]."</td>";
-                                    echo "<td><a href='clonar.php'>Nueva copia</a></td>";
+                                    echo "<td><a href=\"editar.php?{$url_actualizar}\">".$campo["codsede"]."</a></td>";
+                                    echo "<td>".$campo["nombre"]."</td>";
+                                    echo "<td>".$campo["direccion"]."</td>";
+                                    
                                     echo "</tr>";
                                 }
                                 ?>

@@ -3,11 +3,65 @@
 class Modules_Biblio_Model_Detalles{
     
     private $_coddetalle;
-    private $_nombre;
+    private $_codigobarras;
+    private $_codlibro;
+    private $_fechacreacion;
+    private $_edicion;
+    private $_codsede;
+    
     
     function __construct() {
     }
     
+
+    function get_coddetalle() {
+        return $this->_coddetalle;
+    }
+
+    function get_codigobarras() {
+        return $this->_codigobarras;
+    }
+
+    function get_codlibro() {
+        return $this->_codlibro;
+    }
+
+    function get_fechacreacion() {
+        //$this->_fechacreacion=;
+        return $this->_fechacreacion;
+    }
+
+    function get_edicion() {
+        return $this->_edicion;
+    }
+
+    function get_codsede() {
+        return $this->_codsede;
+    }
+
+    function set_coddetalle($_coddetalle) {
+        $this->_coddetalle = $_coddetalle;
+    }
+
+    function set_codigobarras($_codigobarras) {
+        $this->_codigobarras = $_codigobarras;
+    }
+
+    function set_codlibro($_codlibro) {
+        $this->_codlibro = $_codlibro;
+    }
+
+    function set_fechacreacion($_fechacreacion) {
+        $this->_fechacreacion = $_fechacreacion;
+    }
+
+    function set_edicion($_edicion) {
+        $this->_edicion = $_edicion;
+    }
+
+    function set_codsede($_codsede) {
+        $this->_codsede = $_codsede;
+    }
 
 
 

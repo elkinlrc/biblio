@@ -400,6 +400,11 @@ public function add($Obj){
 	$fields = substr($fields, 0, strlen($fields)-1);
 
 	$sql = "INSERT INTO {$this->_table}({$fields}) VALUES (?".str_repeat(",?", $numParams).")";  
+        echo $sql;
+        if($this->_table<>'libros'){
+            
+        //exit();
+        }
 	$flag = $this->ExecuteSql($sql, $Params);
 	if ($flag == false) return false;
 	$last_id = $this->_conexion->lastInsertId($this->_sequence);			

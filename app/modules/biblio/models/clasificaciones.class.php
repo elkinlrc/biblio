@@ -1,12 +1,14 @@
 <?php
 
-class Modules_Biblio_Model_Clasificaciones{
-    
+class Modules_Biblio_Model_Clasificaciones {
+
     private $_codclasificacion;
     private $_nombre;
-    
+
     function __construct() {
+        
     }
+
     function get_codclasificacion() {
         return $this->_codclasificacion;
     }
@@ -15,17 +17,13 @@ class Modules_Biblio_Model_Clasificaciones{
         $this->_codclasificacion = $_codclasificacion;
     }
 
-        function get_nombre() {
+    function get_nombre() {
         return $this->_nombre;
     }
-
-  
 
     function set_nombre($_nombre) {
         $this->_nombre = $_nombre;
     }
-
-
 
 }
 

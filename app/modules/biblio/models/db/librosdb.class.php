@@ -24,8 +24,8 @@ class Modules_Biblio_ModelDb_Librosdb extends Moon2_DBmanager_PDO{
         }
         $order = " ";
         $group ="";
-        $join =" left join metadatoslibros ml on l.codlibro=ml.codlibro  ";
-        $join.=" left join metadatos m on m.codmetadato=ml.codmetadato "; 
+        //$join =" left join metadatoslibros ml on l.codlibro=ml.codlibro  ";
+        //$join.=" left join metadatos m on m.codmetadato=ml.codmetadato "; 
         
                         
 
@@ -49,9 +49,37 @@ class Modules_Biblio_ModelDb_Librosdb extends Moon2_DBmanager_PDO{
         return $arreglo;
     }
     
-    public function search(){
+    public function search(&$rsNumRows, $limit_numrows, $page, $Data){
         
+        $where=" m.valor = ";
+        $from = "FROM ".$this->_table." l ";
+        $join="  inner join metadatoslibros m on l.codlibro=m.codlibro ";
+        $join="  inner join detalles d on l.codlibro=d.codlibro ";
+        if(isset($Data["busqueda"])){
+            $where = $this->get_where($Data["busqueda"]);
+        }
+        $order = " ";
+        $group ="";
+                               
+
+        $sql_num = " SELECT COUNT(*) ";
+        $sql_num.=$from;
+        $sql_num.=$where;
+        $sql_num.=$join;
+
+        $rsNumRows = $this->GetOne($sql_num);
+        $sql_registros = "SELECT l.".$this->_Pkey["key"].", l.titulo,l.subtitulo ";
+        $sql_registros.=$from;
+        $sql_registros.=$where;
+        $sql_registros.=$order;
+        $sql_registros.=$join;
         
+       // echo $sql_registros;
+      //  exit();
+
+        $arreglo = $this->SelectLimit($sql_registros, $limit_numrows, $page);
+
+        return $arreglo;
     }
     
     

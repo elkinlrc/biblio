@@ -30,13 +30,7 @@ $Face->set_type("INSIDE");
 $Face->add_navigation("Listado", "usuarios_admin.php");
 $Face->add_navigation("Usuarios", "#");
 
-
-//armando el combo de los campos de la tabla
 $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
-$arr_nomusuarios = $FacadeUsuarios->combotablas();
-$arr_nomusuarios["codusuario"] = "Codigo";
-$arr_nomusuarios["documento"] = "Documento";
-$arr_nomusuarios["nombres"] = "Nombres";
 
 //Lógica del negocio
 $arr_cabeceras_tabla = array();

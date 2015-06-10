@@ -4,7 +4,6 @@ $id_security= array("EVADOC_EVA_REA");
 
 $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);
-
 $page =$parametros->get_parameter("npage",0);
 $limit_numrows =$parametros->get_parameter("nrows",15);
 $parametros->add("SECURITY_ID","FALSE");
@@ -16,9 +15,7 @@ $palabraBusqueda=$parametros->get_parameter("Sw","");
 $formulario=new Moon2_Forms_Form();
 $arr_busqueda=array();
 $arr_busqueda[1]="Codigo";//el numero es el valor del value
-
 $arr_busqueda[2]="Nombre";
-$arr_busqueda[3]="Subtitulo";
 
 
 
@@ -26,29 +23,26 @@ $rsNumRows=0;
 $Data=array();
 $Data["busqueda"][$opcionBusqueda]=$palabraBusqueda;
 
-
-$facade = new Modules_Biblio_Model_LibrosFacade();
-$facade->add_searchField("1","l.codlibro");
-$facade->add_searchField("2","l.titulo");
-$facade->add_searchField("2","l.subtitulo");
+//$facadeAutores = new Modules_Empresa_Model_Edificiosfacade;
+$facade = new Modules_Biblio_Model_SedesFacade();
+$facade->add_searchField("1","s.codsede");
+$facade->add_searchField("2","s.nombre");
 //$facadeEdificios->add_searchField("3","e.edificio");
 
 
 $Face = new Moon2_ViewManager_Controller();
-$Face->set_sysmenu(TRUE);
-//$Face->set_type("OUTSIDE");
+$Face->set_sysmenu(true);
 $Face->set_type("INSIDE");
-$Face->set_name("Listado de Clasificación ");
+$Face->set_name("Listar Sedes");
 
 $Face->add_navigation("Inicio", "index.php");
-$Face->add_navigation("Listado de Clasficacion Biblioteca", "#");
+$Face->add_navigation("Listar Autores", "#");
 
 
-//$registros = $facadeEdificios->load_all($rsNumRows, $limit_numrows, $page, $Data);
+
 $registros = $facade->load_all($rsNumRows, $limit_numrows, $page,$Data);
 $paginador = new Moon2_Pagination_Pager($rsNumRows, $limit_numrows, $page, $parametros);
 
 echo $Face->open();
 require($Face->getView());
 echo $Face->close();
-?>

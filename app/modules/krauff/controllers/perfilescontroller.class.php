@@ -47,9 +47,9 @@ private function crear(){
 
     $this->_parameters->delete_all();
     $this->_parameters->add("msg", $msg);
-    $this->_parameters->add("cod", $obj->get_codperfil());
+    $this->_parameters->add("codperfil", $obj->get_codperfil());
     $cadenaUrl = $this->_parameters->KeyGen();
-    exit();
+    //exit();
     $this->_url = $this->_path_config["ROOT"]["modules"]."/krauff/views/perfiles_admin.php?".$cadenaUrl;
     $script = "<script>\n";
     $script.= "window.parent.location.href = '{$this->_url}';\n";
@@ -70,7 +70,7 @@ private function eliminar(){
 
     $this->_parameters->delete_all();
     $this->_parameters->add("msg", $msg);
-    $this->_parameters->add("cod", $obj->get_codperfil());
+    $this->_parameters->add("codperfil", $obj->get_codperfil());
     $cadenaUrl = $this->_parameters->KeyGen();
 
     $this->_url = $this->_path_config["ROOT"]["modules"]."/krauff/views/perfiles_admin.php?".$cadenaUrl;
@@ -107,8 +107,8 @@ private function editar(){
     $xhtml.= "<td>";
     $xhtml.= "  <div class=\"btn-toolbar\">";
     $xhtml.= "  <div class=\"btn-group\">";
-    $xhtml.= "   <a title=\"Actualizar perfil\" class=\"btn btn-default abrir_flotante\" href=\"perfiles_editar.php?{$params_actualizar}\"><i class=\"icon-edit\"></i></a>";
-    $xhtml.= "   <a title=\"Perfil: {$obj->get_nombreperfil()}\" class=\"btn btn-default msgbox-confirm\" href=\"{$params_eliminar}\"><i class=\"icon-trash\"></i></a>";
+    $xhtml.= "   <a title=\"Editar perfil\" class=\"btn btn-default abrir_flotante\" href=\"perfiles_editar.php?{$params_actualizar}\"><i class=\"icon-edit\"></i></a>";
+    $xhtml.= "   <a title=\"Eliminar Perfil: {$obj->get_nombreperfil()}\" class=\"btn btn-default msgbox-confirm\" href=\"{$params_eliminar}\"><i class=\"icon-trash\"></i></a>";
     $xhtml.= "  </div>";
     $xhtml.= "  </div>";
     $xhtml.= "</td>";
@@ -122,7 +122,7 @@ private function buscar(){
     $caja_busqueda = $this->_parameters->get_parameter("buscar","0");
 
     $this->_parameters->delete_all();
-    $this->_parameters->add("cod", $obj->get_codperfil());
+    $this->_parameters->add("codperfil", $obj->get_codperfil());
     $this->_parameters->add("nomcampos",$combo_campos);
     $this->_parameters->add("buscar",$caja_busqueda);
     $cadenaUrl = $this->_parameters->KeyGen();

@@ -11,14 +11,13 @@ if (!isset($DOM["SECURITY_ID"])) {
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-edit"></i>
-                        <h3>Actualizar</h3>
+                        <h3>Editar</h3>
                     </div> <!-- /widget-header -->
                     <div class="widget-content">
                         <form id="frm_usuarios" method="post" action="moon2.php" onSubmit="javascript:return checkform('frm_usuarios');">
                             <input type="hidden" id="action" name="action" value="editar" />
                             <input type="hidden" id="codusuario" name="codusuario" value="<?php echo $Usuario->get_codusuario() ?>" />
-                            <input type="hidden" id="controller" name="controller" value="krauff/usuarioscontroller" />
-                            <fieldset>
+                            <input type="hidden" id="controller" name="controller" value="krauff/usuarioscontroller" />                            
                                <div class="table-responsive">
                                     <table border="0"  class="table table-striped table-condensed">
                                         <tbody>
@@ -28,9 +27,9 @@ if (!isset($DOM["SECURITY_ID"])) {
                                                 <td><label class="col-sm-12 control-label">Tipo Documento</label></td>
                                             </tr>
                                             <tr>
-                                                <td><?php echo $Formulario->addObject("MenuList", "codperfil", $arr_perfiles, $Usuario->get_codperfil(), "class='form-control'  tabindex='1'"); ?></td>
-                                                <td colspan="2"><input type="text" class="form-control validate[required,minSize[1],maxSize[150]]" id="nombres" name="nombres" size="100" tabindex="2" value="<?php echo $Usuario->get_nombres() ?>"/></td>
-                                                <td><?php echo $Formulario->addObject("MenuList", "tipodoc", $DOM["TIPODOC"], $Usuario->get_tipodoc(), "class='form-control' tabindex='3'"); ?></td>
+                                                <td><?php echo $Formulario->addObject("MenuList", "codperfil", $arr_perfiles, $Usuario->get_codperfil(), "class='form-control'  tabindex='1' style='cursor:pointer;'"); ?></td>
+                                                <td colspan="2"><input type="text" class="form-control validate[required,minSize[1],maxSize[150]]" id="nombres" name="nombres" size="70" tabindex="2" value="<?php echo $Usuario->get_nombres() ?>"/></td>
+                                                <td><?php echo $Formulario->addObject("MenuList", "tipodoc", $DOM["TIPODOC"], $Usuario->get_tipodoc(), "class='form-control' tabindex='3' style='cursor:pointer;'"); ?></td>
                                             </tr>
                                             <tr>
                                             
@@ -41,8 +40,8 @@ if (!isset($DOM["SECURITY_ID"])) {
                                             </tr>
                                              <tr>
 
-                                                <td><input type="text" class="form-control validate[required,custom[integer],minSize[1],maxSize[30]]" id="documento" name="documento" size="30" tabindex="4" value="<?php echo $Usuario->get_documento() ?>"/></td>
-                                                <td><?php echo $Formulario->addObject("MenuList", "genero", $DOM["GENERO"], $Usuario->get_genero(), "class='form-control' tabindex='5'"); ?></td>
+                                                <td><input type="text" class="form-control validate[required,custom[integer],minSize[1],maxSize[30]]" id="documento" name="documento" size="20" tabindex="4" value="<?php echo $Usuario->get_documento() ?>"/></td>
+                                                <td><?php echo $Formulario->addObject("MenuList", "genero", $DOM["GENERO"], $Usuario->get_genero(), "class='form-control' tabindex='5' style='cursor:pointer;'"); ?></td>
                                                 <td><input type="text" class="form-control validate[required,minSize[1],maxSize[100]]" id="direccion" name="direccion" size="60" tabindex="6" value="<?php echo $Usuario->get_direccion() ?>"/></td>
                                                 <td><input type="text" class="form-control validate[required,minSize[1],maxSize[100]]" id="telefono" name="telefono" size="30" tabindex="7" value="<?php echo $Usuario->get_telefono() ?>"/></td>
                                             </tr>
@@ -95,7 +94,6 @@ if (!isset($DOM["SECURITY_ID"])) {
                                         </tbody>
                                     </table>
                                 </div>
-                            </fieldset>
                         </form>
                         <div class="clear"></div>
                     </div> <!-- /widget-content -->

@@ -19,23 +19,14 @@ $searchOption 	= $Params->get_parameter("So", "");
 $limit_numrows 	= $Params->get_parameter("nrows", 7);
 $Formulario = new Moon2_Forms_Form();
 
-
 //Gestor de la página
 $Face = new Moon2_ViewManager_Controller();
 $Face->set_name("Perfiles - Administrar");
-$Face->set_component("Mantenimiento Tablas");
+$Face->set_component("General");
 $Face->add_javascript("../js/perfiles.js");
 $Face->set_type("INSIDE");
 $Face->add_navigation("Listado", "perfiles_admin.php");
 $Face->add_navigation("Perfiles", "#");
-
-
-//armando el combo de los campos de la tabla
-$FacadePerfiles = new Modules_Krauff_Model_PerfilesFacade();
-$arr_nomperfiles = $FacadePerfiles->combotablas();
-$arr_nomperfiles["codperfil"] = "Codigo";
-$arr_nomperfiles["nombreperfil"] = "Nombre";
-
 
 //Lógica del negocio
 $arr_cabeceras_tabla = array();
@@ -45,7 +36,7 @@ $arr_cabeceras_tabla[1]["order"] = "p.codperfil";
 
 $arr_cabeceras_tabla[2]["name"] = "Nombre";
 $arr_cabeceras_tabla[2]["size"] = " width=\"80%\"";
-$arr_cabeceras_tabla[2]["order"] = "p.nombreperfil";
+$arr_cabeceras_tabla[2]["order"] = "";
 
 $arr_cabeceras_tabla[3]["name"] = "";
 $arr_cabeceras_tabla[3]["size"] = " width=\"9%\"";
