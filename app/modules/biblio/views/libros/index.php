@@ -6,7 +6,7 @@ $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);
 
 $page =$parametros->get_parameter("npage",0);
-$limit_numrows =$parametros->get_parameter("nrows",15);
+$limit_numrows =$parametros->get_parameter("nrows",10);
 $parametros->add("SECURITY_ID","FALSE");
 
 $opcionBusqueda=$parametros->get_parameter("So","");

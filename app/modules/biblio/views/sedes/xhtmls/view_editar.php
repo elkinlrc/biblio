@@ -11,18 +11,18 @@ if (!isset($id_security)) {
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
-                        <h3>Crear Autor</h3>
+                        <h3>Editar Sede</h3>
                     </div>
                     <div class="widget-content">
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
                             <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
                             <input type="hidden" id="action" name="action" value="editar" />
                             <input type="hidden" id="controller" name="controller" value="Biblio/SedesController" />
-                            <input type="hidden" id="codautor" name="codautor" value="<?php echo $obj->get_codautor();?>" />
+                            <input type="hidden" id="codsede" name="codsede" value="<?php echo $obj->get_codsede();?>" />
                             <table class="table table-bordered table-highlight">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Editar Sede|</th>
+                                        <th colspan="2">Datos de la sede</th>
                                     </tr>
                                 </thead>
                                 <tbody> 
@@ -31,7 +31,7 @@ if (!isset($id_security)) {
                                         <td><input type="text" id="nombre" name="nombre" value="<?php echo $obj->get_nombre(); ?>" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
                                     <tr>
-                                        <td>Direccón</td>
+                                        <td>Dirección</td>
                                         <td><input type="text" id="direccion" name="direccion" value="<?php echo $obj->get_direccion(); ?>" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
                                     

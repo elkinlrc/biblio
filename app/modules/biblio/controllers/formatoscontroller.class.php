@@ -33,11 +33,11 @@ class Modules_Biblio_Controllers_FormatosController {
 
     private function crear() {
         $obj = new Modules_Biblio_Model_Formatos();
-        $objo = $this->_parameters->set_object($obj);
+        $obj = $this->_parameters->set_object($obj);
         $facade = new Modules_Biblio_Model_FormatosFacade();
         
         $mensaje = 31;
-        if ($facade->add($objo)) {
+        if ($facade->add($obj)) {
             $mensaje = 11;
         }
         $this->_parameters->delete_all();
@@ -81,18 +81,18 @@ class Modules_Biblio_Controllers_FormatosController {
     }
 
     private function editar() {
-        $obj = new Modules_Biblio_Model_Autores();
-        $objo = $this->_parameters->set_object($obj);
-        $facade = new Modules_Biblio_Model_AutoresFacade();
+        $obj = new Modules_Biblio_Model_Formatos();
+        $obj = $this->_parameters->set_object($obj);
+        $facade = new Modules_Biblio_Model_FormatosFacade();
         $mensaje = 32;
-        if ($facade->update($objo)) {
+        if ($facade->update($obj)) {
 
         
             $mensaje = 12;
         }
         $this->_parameters->delete_all();
         $this->_parameters->add("msg", $mensaje);
-        $this->_parameters->add("codsede", $obj->get_codautor());
+        $this->_parameters->add("codsede", $obj->get_codformato());
 
         $cadenaurl = $this->_parameters->KeyGen();
         $ruta = $this->_pathConfig["ROOT"]["modules"];

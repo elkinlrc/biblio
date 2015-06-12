@@ -29,10 +29,10 @@ if (!isset($id_security)) {
                                 </thead>
                                 <tbody> 
                                     <tr>
-                                        <td>titulo</td>
+                                        <td>Título</td>
                                         <td><input type="text" id="titulo" name="titulo" class="form-control validate[required, minSize[4]]" size="30" value=""/></td>
 
-                                        <td>Subtitulo</td>
+                                        <td>Subtítulo</td>
                                         <td><input type="text" id="subtitulo" name="subtitulo" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
                                     <tr>
@@ -82,7 +82,7 @@ if (!isset($id_security)) {
                                     ?>
                             </table>
                             <ul class="nav nav-tabs">
-                                <li><a href="#home" data-toggle="tab">Cantidad</a></li>
+                                <li  class="active" ><a href="#home" data-toggle="tab">Cantidad</a></li>
                                 <li><a href="#profile" data-toggle="tab">Autores</a></li>
 
                             </ul>

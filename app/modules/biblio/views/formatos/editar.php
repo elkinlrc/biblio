@@ -18,7 +18,7 @@ $Face->add_navigation("Editar ", "#");
 
 
 $obj = new Modules_Biblio_Model_Formatos();
-$obj->set_codautor($codigo);
+$obj->set_codformato($codigo);
 
 $facade = new Modules_Biblio_Model_FormatosFacade();
 $obj = $facade->loadOne($obj);

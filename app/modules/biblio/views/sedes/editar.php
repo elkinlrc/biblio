@@ -1,6 +1,6 @@
 <?php
 require("../../../../config/config.inc.php");
-$DOM["SECURITY_ID"] = "*";
+$id_security= array("EVADOC_EVA_REA");
 
 $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);

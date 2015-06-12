@@ -23,18 +23,15 @@ if (!isset($id_security)) {
                                     <tr>
                                         <th colspan="2">Nuevo Formato</th>
                                     </tr>
-
-
-
-                                </thead>
+                               </thead>
                                 <tbody> 
                                     <tr>
                                         <td>Nombre</td>
-                                        <td><input type="text" id="nombre" name="nombre" class="form-control validate[required, minSize[4]]" size="30"/></td>
+                                        <td><input type="text" id="nombre" name="nombre" maxlength="20" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
                                     <tr>
                                         <td>Descripcion</td>
-                                        <td><input type="text" id="descripcion" name="descripcion" class="form-control validate[required, minSize[4]]" size="30"/></td>
+                                        <td><input type="text" id="descripcion" name="descripcion" maxlength="40" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
     
                                     <tr>

@@ -20,7 +20,7 @@ function xhtml_header_styles($paths, $theme, $stylesOut){
     $styles[] = "bootstrap.min.css";
     $styles[] = "bootstrap-responsive.min.css";
     $styles[] = "font-awesome.min.css";
-    $styles[] = "base-admin-3.css";
+ //   $styles[] = "base-admin-3.css";
     //$styles[] = "ui-lightness/jquery-ui-1.10.0.custom.min.css";
     $styles[] = "ui-lightness/jquery-ui-1.10.3.custom.css";
     $styles[] = "tree/skin/ui.dynatree.css";
@@ -30,11 +30,11 @@ function xhtml_header_styles($paths, $theme, $stylesOut){
     $styles[] = "../js/plugins/msgbox/jquery.msgbox.css";
     $styles[] = "../js/plugins/tooltip/docs.css";
     
-    $styles[] = "base-admin-3-responsive.css";
-    $styles[] = "pages/plans.css";
-    $styles[] = "pages/pricing.css";
-    $styles[] = "pages/signin.css";
-    $styles[] = "pages/dashboard.css";
+   // $styles[] = "base-admin-3-responsive.css";
+   // $styles[] = "pages/plans.css";
+   // $styles[] = "pages/pricing.css";
+    //$styles[] = "pages/signin.css";
+   // $styles[] = "pages/dashboard.css";
     $styles[] = "validationEngine.jquery.css";
     //$styles[] = "custom.css";
     foreach($styles as $key => $value){

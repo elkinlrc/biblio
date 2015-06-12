@@ -11,7 +11,7 @@ if (!isset($id_security)) {
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
-                        <h3>Crear Autor</h3>
+                        <h3>Nueva Sede</h3>
                     </div>
                     <div class="widget-content">
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
@@ -21,7 +21,7 @@ if (!isset($id_security)) {
                             <table class="table table-bordered table-highlight">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Nueva sede</th>
+                                        <th colspan="2">Datos de la sede</th>
                                     </tr>
 
 

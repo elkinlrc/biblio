@@ -57,7 +57,7 @@ if (!isset($id_security)) {
                                 <tr>
                                     <th width="20%">Código </th>
                                     <th width="50%" style="text-align: center">Nombre </th>
-                                    <th width="50%" style="text-align: center">Direccion </th>
+                                    <th width="50%" style="text-align: center">Dirección </th>
                                     
                                 </tr>
                             </thead>

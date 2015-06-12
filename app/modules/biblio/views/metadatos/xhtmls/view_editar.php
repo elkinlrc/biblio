@@ -11,7 +11,7 @@ if (!isset($id_security)) {
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
-                        <h3>Crear Autor</h3>
+                        <h3>Editar Columna</h3>
                     </div>
                     <div class="widget-content">
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
@@ -22,7 +22,7 @@ if (!isset($id_security)) {
                             <table class="table table-bordered table-highlight">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Nuevo Autor</th>
+                                        <th colspan="2">Datos de la Columna</th>
                                     </tr>
 
 
@@ -34,11 +34,11 @@ if (!isset($id_security)) {
                                         <td><input type="text" id="etiqueta" name="etiqueta" value="<?php echo $obj->get_etiqueta(); ?>" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
                                      <tr>
-                                        <td>Minimo</td>
+                                        <td>Mínimo</td>
                                         <td><input type="number" id="minimo" name="minimo"  class="form-control" size="30" value="<?php echo $obj->get_minimo(); ?>"/></td>
                                     </tr>
                                       <tr>
-                                        <td>Maximo</td>
+                                        <td>Máximo</td>
                                         <td><input type="number" id="maximo" name="maximo" class="form-control" size="30" value="<?php echo $obj->get_maximo(); ?>"/></td>
                                     </tr>
                                      <tr>

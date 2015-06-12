@@ -11,10 +11,11 @@ if (!isset($id_security)) {
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
-                        <h3>Listar Edificios</h3>
+                        <h3>Listar Autores</h3>
                     </div>
                     <div class="widget-content">
-                        <a href="crear.php">Nuevo</a>
+                        <a href="crear.php" class="btn btn-success">Nuevo</a>
+                        <br/>
                          <form name="formulario" id="formulario" method="POST" action="traceo.php" onsubmit="javascript:return checkform('formulario');">
                                 <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false" />
                                 <input type="hidden" id="action" name="action" value="buscar" />
@@ -24,20 +25,20 @@ if (!isset($id_security)) {
                                 <table class="table table-striped">
                                     
                                     <tr>
-                                        <td class="danger">&nbsp;</td>
-                                        <td class="danger"><?php
+                                        <td class="">&nbsp;</td>
+                                        <td class=""><?php
                                         echo $formulario->addObject("RadioHorizontal", "So", $arr_busqueda, $opcionBusqueda, "");
                                         ?>
                                         </td>  
-                                        <td class="danger"></td>
+                                        <td class=""></td>
                                         
                                     </tr>
                                     
                                     
                                     <tr>
-                                        <td class="danger">Buscar</td>
-                                        <td class="danger" ><input type="text" name="Sw" id="Sw"  class="form-control" value="<?php echo $palabraBusqueda;?>"/></td> 
-                                        <td class="danger" ><input type="submit" name="btnBuscar" id="btnBuscar" value=" Iniciar Busqueda" class="btn btn-danger" /></td>
+                                        <td class="">Buscar</td>
+                                        <td class="" ><input type="text" name="Sw" id="Sw"  class="form-control" value="<?php echo $palabraBusqueda;?>"/></td> 
+                                        <td class="" ><input type="submit" name="btnBuscar" id="btnBuscar" value=" Iniciar Busqueda" class="btn btn-danger" /></td>
                                         
                                         
                                        
