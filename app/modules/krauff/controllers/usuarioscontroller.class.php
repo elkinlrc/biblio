@@ -88,7 +88,7 @@ private function crear(){
     //$clave = $this->_parameters->get_parameter("nomcampos","0");
     
     if($this->_dom["USER_ID"] != -1){
-    $obj->set_codempresa($this->_dom["EMPRESA_ID"]);
+    $obj->set_codcolegio($this->_dom["COLEGIO_ID"]);
     }
     
     $clave_sincifrar = $obj->get_clavesincifrar();
@@ -108,60 +108,45 @@ private function crear(){
     $this->_parameters->add("msg", $msg);
     $this->_parameters->add("codusuario", $obj->get_codusuario());
     $cadenaUrl = $this->_parameters->KeyGen();
-   // exit();
+   //exit();
     $this->_url = $this->_path_config["ROOT"]["modules"]."/krauff/views/usuarios_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
 }
 
-private function crearmesero(){
+private function crearproveedor(){
     $obj = new Modules_Krauff_Model_Usuarios();
     $obj = $this->_parameters->set_object($obj);
-    
+ 
     $obj->set_codempresa($this->_dom["EMPRESA_ID"]);
-    $obj->set_codperfil(3);//codigo del mesero
-    
+    $obj->set_codperfil(5);//codigo del provedor
     $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
-   
-    if ($FacadeUsuarios->add($obj)){
-        $msg2 = $this->_dom["FMESSAGE"]["success"];
-    }
-    else{
-        $msg2 = $this->_dom["FMESSAGE"]["error"];
-        
-    }
-    $this->_parameters->delete_all();
-    $this->_parameters->add("msg2", $msg2);
-    $this->_parameters->add("codusuario", $obj->get_codusuario());
-    $cadenaUrl = $this->_parameters->KeyGen();
-    //exit();
+    
 
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/meseros_admin.php?".$cadenaUrl;
+    if ($FacadeUsuarios->add($obj)){
+        $msg = $this->_dom["FMESSAGE"]["success"];
+    } 
+    else{
+        $msg = $this->_dom["FMESSAGE"]["error"];
+    }
+
+    $this->_parameters->delete_all();
+    $this->_parameters->add("msg", $msg);
+    $this->_parameters->add("codproveedor", $obj->get_codusuario());
+    $cadenaUrl = $this->_parameters->KeyGen();
+//    exit();
+
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/proveedores_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
 }
 
-private function crearcliente(){
+private function creartecnico(){
     $obj = new Modules_Krauff_Model_Usuarios();
     $obj = $this->_parameters->set_object($obj);
-    $combo_tipodoc = $this->_parameters->get_parameter("tipodoc","0");
-    $celular1 = $this->_parameters->get_parameter("celular","0");
-    $telefono1 = $this->_parameters->get_parameter("telefono","0");
-    $celular2 = $this->_parameters->get_parameter("celular2","0");
-    $telefono2 = $this->_parameters->get_parameter("telefono2","0");
-
-    if($combo_tipodoc != "NT"){   
-        $obj->set_celular($celular1);
-        $obj->set_telefono($telefono1);
-    }
-    else{
-        
-        $obj->set_celular($celular2);
-        $obj->set_telefono($telefono2); 
-    }
-    
+ 
     $obj->set_codempresa($this->_dom["EMPRESA_ID"]);
-    $obj->set_codperfil(4);//codigo del cliente
+    $obj->set_codperfil(2);//codigo del tecnico
     
     $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
     
@@ -177,20 +162,20 @@ private function crearcliente(){
     $this->_parameters->add("msg", $msg);
     $this->_parameters->add("codcliente", $obj->get_codusuario());
     $cadenaUrl = $this->_parameters->KeyGen();
-   // exit();
+//    exit();
 
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/clientes_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/tecnicos_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
 }
 
-private function crearclientelite(){
+
+private function crearfuncionario(){
     $obj = new Modules_Krauff_Model_Usuarios();
     $obj = $this->_parameters->set_object($obj);
-    $cod_venta = $this->_parameters->get_parameter("codventa","0");
-
+ 
     $obj->set_codempresa($this->_dom["EMPRESA_ID"]);
-    $obj->set_codperfil(4);//codigo del cliente
+    $obj->set_codperfil(3);//codigo del funcionario
     
     $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
     
@@ -204,16 +189,42 @@ private function crearclientelite(){
 
     $this->_parameters->delete_all();
     $this->_parameters->add("msg", $msg);
-    $this->_parameters->add("codventa", $cod_venta);
+    $this->_parameters->add("codcliente", $obj->get_codusuario());
     $cadenaUrl = $this->_parameters->KeyGen();
-   // exit();
+//    exit();
 
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/ventas_crear.php?".$cadenaUrl;
-    $script = "<script>\n";
-    $script.= "window.parent.location.href = '{$this->_url}';\n";
-    $script.= "</script>\n";
-    echo $script;
-    exit();
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/funcionarios_admin.php?".$cadenaUrl;
+    header("Location: {$this->_url}");
+    exit(); 
+}
+
+
+private function crearcliente(){
+    $obj = new Modules_Krauff_Model_Usuarios();
+    $obj = $this->_parameters->set_object($obj);
+ 
+    $obj->set_codempresa($this->_dom["EMPRESA_ID"]);
+    $obj->set_codperfil(4);//codigo del fcliente
+    
+    $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
+    
+
+    if ($FacadeUsuarios->add($obj)){
+        $msg = $this->_dom["FMESSAGE"]["success"];
+    } 
+    else{
+        $msg = $this->_dom["FMESSAGE"]["error"];
+    }
+
+    $this->_parameters->delete_all();
+    $this->_parameters->add("msg", $msg);
+    $this->_parameters->add("codcliente", $obj->get_codusuario());
+    $cadenaUrl = $this->_parameters->KeyGen();
+//    exit();
+
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/clientes_admin.php?".$cadenaUrl;
+    header("Location: {$this->_url}");
+    exit(); 
 }
 
 private function editar(){
@@ -236,7 +247,7 @@ private function editar(){
 
     $this->_parameters->delete_all();
     $this->_parameters->add("msg", $msg);
-    $this->_parameters->add("cod", $obj->get_codusuario());
+    $this->_parameters->add("codusuario", $obj->get_codusuario());
     $cadenaUrl = $this->_parameters->KeyGen();
     //exit();
     $this->_url = $this->_path_config["ROOT"]["modules"]."/krauff/views/usuarios_admin.php?".$cadenaUrl;
@@ -244,12 +255,12 @@ private function editar(){
     exit();  
 }
 
-private function editarmeseros(){
+private function editartecnico(){
     $obj = new Modules_Krauff_Model_Usuarios();
     $obj = $this->_parameters->set_object($obj);
     
     $obj->set_codempresa($this->_dom["EMPRESA_ID"]);
-    $obj->set_codperfil(3);//codigo del mesero
+    $obj->set_codperfil(2);//codigo del mesero
     
     $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
     $msg = 1;
@@ -258,13 +269,44 @@ private function editarmeseros(){
         $msg = 3;
         exit();
     }
-
     $this->_parameters->delete_all();
     $this->_parameters->add("msg", $msg);
-    $this->_parameters->add("cod", $obj->get_codusuario());
+    $this->_parameters->add("codusuario", $obj->get_codusuario());
     $cadenaUrl = $this->_parameters->KeyGen();
     //exit();
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/meseros_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/tecnicos_admin.php?".$cadenaUrl;
+    header("Location: {$this->_url}");
+    exit();  
+}
+
+
+
+
+
+
+private function editarfuncionario(){
+    $obj = new Modules_Krauff_Model_Usuarios();
+    $obj = $this->_parameters->set_object($obj);
+    
+    $obj->set_codempresa($this->_dom["EMPRESA_ID"]);
+    $obj->set_codperfil(3);//codigo del funcionario
+    
+    $pin_sincifrar = $obj->get_pin();
+    $obj->set_pinencriptado(md5($pin_sincifrar));
+    
+    $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
+    $msg = 1;
+    if ($FacadeUsuarios->update($obj) == false){
+        header("Status: 400 Bad request", false, 400);
+        $msg = 3;
+        exit();
+    }
+    $this->_parameters->delete_all();
+    $this->_parameters->add("msg", $msg);
+    $this->_parameters->add("codusuario", $obj->get_codusuario());
+    $cadenaUrl = $this->_parameters->KeyGen();
+    //exit();
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/funcionarios_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit();  
 }
@@ -301,7 +343,36 @@ private function editarclientes(){
     $this->_parameters->add("codcliente", $obj->get_codusuario());
     $cadenaUrl = $this->_parameters->KeyGen();
     //exit();
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/clientes_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/helpdesk/views/clientes_admin.php?".$cadenaUrl;
+    header("Location: {$this->_url}");
+    exit();  
+}
+
+
+
+
+
+private function editarproveedor(){
+    $obj = new Modules_Krauff_Model_Usuarios();
+    $obj = $this->_parameters->set_object($obj);
+    
+    $obj->set_codempresa($this->_dom["EMPRESA_ID"]);
+    $obj->set_codperfil(5);//codigo del proiveedor
+   
+    
+    $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
+    $msg = 1;
+    if ($FacadeUsuarios->update($obj) == false){
+        header("Status: 400 Bad request", false, 400);
+        $msg = 3;
+        exit();
+    }
+    $this->_parameters->delete_all();
+    $this->_parameters->add("msg", $msg);
+    $this->_parameters->add("codusuario", $obj->get_codusuario());
+    $cadenaUrl = $this->_parameters->KeyGen();
+    //exit();
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/proveedores_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit();  
 }
@@ -326,26 +397,6 @@ private function eliminar(){
     exit();
 }
 
-private function eliminarmesero(){
-    $obj = new Modules_Krauff_Model_Usuarios();
-    $obj = $this->_parameters->set_object($obj);
-
-    $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
-    $msg = 33;
-    if ($FacadeUsuarios->delete($obj)){
-        $msg = 11;
-    }
-
-    $this->_parameters->delete_all();
-    $this->_parameters->add("msg", $msg);
-    $this->_parameters->add("cod", $obj->get_codusuario());
-    $cadenaUrl = $this->_parameters->KeyGen();
-
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/meseros_admin.php?".$cadenaUrl;
-    header("Location: {$this->_url}");
-    exit();
-}
-
 private function eliminarcliente(){
     $obj = new Modules_Krauff_Model_Usuarios();
     $obj = $this->_parameters->set_object($obj);
@@ -366,6 +417,69 @@ private function eliminarcliente(){
     exit();
 }
 
+private function eliminartecnico(){
+    $obj = new Modules_Krauff_Model_Usuarios();
+    $obj = $this->_parameters->set_object($obj);
+
+    $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
+    $msg2 = 33;
+    if ($FacadeUsuarios->delete($obj)){
+        $msg2 = 11;
+    }
+
+    $this->_parameters->delete_all();
+    $this->_parameters->add("msg2", $msg2);
+    $this->_parameters->add("codusuario", $obj->get_codusuario());
+    $cadenaUrl = $this->_parameters->KeyGen();
+
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/tecnicos_admin.php?".$cadenaUrl;
+    header("Location: {$this->_url}");
+    exit();
+}
+
+
+private function eliminarproveedor(){
+    $obj = new Modules_Krauff_Model_Usuarios();
+    $obj = $this->_parameters->set_object($obj);
+
+    $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
+    $msg2 = 33;
+    if ($FacadeUsuarios->delete($obj)){
+        $msg2 = 11;
+    }
+
+    $this->_parameters->delete_all();
+    $this->_parameters->add("msg2", $msg2);
+    $this->_parameters->add("codusuario", $obj->get_codusuario());
+    $cadenaUrl = $this->_parameters->KeyGen();
+
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/proveedores_admin.php?".$cadenaUrl;
+    header("Location: {$this->_url}");
+    exit();
+}
+
+
+private function eliminarfuncionario(){
+    $obj = new Modules_Krauff_Model_Usuarios();
+    $obj = $this->_parameters->set_object($obj);
+
+    $FacadeUsuarios = new Modules_Krauff_Model_UsuariosFacade();
+    $msg2 = 33;
+    if ($FacadeUsuarios->delete($obj)){
+        $msg2 = 11;
+    }
+
+    $this->_parameters->delete_all();
+    $this->_parameters->add("msg2", $msg2);
+    $this->_parameters->add("codusuario", $obj->get_codusuario());
+    $cadenaUrl = $this->_parameters->KeyGen();
+
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/funcionarios_admin.php?".$cadenaUrl;
+    header("Location: {$this->_url}");
+    exit();
+}
+
+
 private function buscar(){
     $obj = new Modules_Krauff_Model_Usuarios();
     $combo_campos = $this->_parameters->get_parameter("nomcampos","0");
@@ -382,22 +496,6 @@ private function buscar(){
     exit(); 
 }
 
-private function buscarmeseros(){
-    $obj = new Modules_Krauff_Model_Usuarios();
-    $combo_campos = $this->_parameters->get_parameter("nomcampos","0");
-    $caja_busqueda = $this->_parameters->get_parameter("buscar","0");
-
-    $this->_parameters->delete_all();
-    $this->_parameters->add("cod", $obj->get_codusuario());
-    $this->_parameters->add("nomcampos",$combo_campos);
-    $this->_parameters->add("buscar",$caja_busqueda);
-    $cadenaUrl = $this->_parameters->KeyGen();
-    
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/meseros_admin.php?".$cadenaUrl;
-    header("Location: {$this->_url}");
-    exit(); 
-}
-
 private function buscarclientes(){
     $obj = new Modules_Krauff_Model_Usuarios();
     $combo_campos = $this->_parameters->get_parameter("nomcampos","0");
@@ -409,7 +507,23 @@ private function buscarclientes(){
     $this->_parameters->add("buscar",$caja_busqueda);
     $cadenaUrl = $this->_parameters->KeyGen();
     
-    $this->_url = $this->_path_config["ROOT"]["modules"]."/pos/views/clientes_admin.php?".$cadenaUrl;
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Pos/views/clientes_admin.php?".$cadenaUrl;
+    header("Location: {$this->_url}");
+    exit(); 
+}
+
+private function buscartecnico(){
+    $obj = new Modules_Krauff_Model_Usuarios();
+    $combo_campos = $this->_parameters->get_parameter("nomcampos","0");
+    $caja_busqueda = $this->_parameters->get_parameter("buscar","0");
+
+    $this->_parameters->delete_all();
+    $this->_parameters->add("codtecnico", $obj->get_codusuario());
+    $this->_parameters->add("nomcampos",$combo_campos);
+    $this->_parameters->add("buscar",$caja_busqueda);
+    $cadenaUrl = $this->_parameters->KeyGen();
+    
+    $this->_url = $this->_path_config["ROOT"]["modules"]."/Hojadevida/views/tecnicos_admin.php?".$cadenaUrl;
     header("Location: {$this->_url}");
     exit(); 
 }

@@ -34,14 +34,18 @@ public function __construct() {
 public function open(){
     $menuHtml = "";
     if ($this->_sysmenu){
-        $menuHtml.= xhtml_menu("header", $this->_dataPath["MAINPAGE"], $this->_defaultComponent);
+      //  $menuHtml.= xhtml_menu("header", $this->_dataPath["MAINPAGE"], $this->_defaultComponent);
         $menuHtml.= $this->buildMenu($this->_initialValue);
-        $menuHtml.= xhtml_menu("footer", $this->_dataPath["MAINPAGE"], "");
+       // $menuHtml.= xhtml_menu("footer", $this->_dataPath["MAINPAGE"], "");
     }
+    
     $html = xhtml_header($this->_name, $this->_dataPath, $this->_theme, $this->_javafiles, $this->_stylefiles);
-    $html.= xhtml_body_open($this->_type, $this->_dataPath, $this->_dataDomain);
-    $html.= $menuHtml;
+    $html.= xhtml_body_open($this->_type, $this->_dataPath, $this->_dataDomain,$menuHtml);
+    //$html.= $menuHtml;
+    
+    
     $html.= $this->buildNavigationbar();
+    
     return $html;
 }
 
@@ -144,6 +148,9 @@ private function getArray($codfunc){
 public function buildMenu($parent){
     $html= "";
     $arrayData = $this->_dataDomain["MENUSYSTEM"];
+    
+    //var_dump($arrayData);
+    
     foreach ($arrayData as $key => $field){
         if ($field["codpadre"] == $parent){
             $active = "";
@@ -151,7 +158,7 @@ public function buildMenu($parent){
                 $active = " active";
             }
             $html.= "<li class=\"dropdown{$active}\">\n";
-            $html.= "     <a href=\"javascript:;\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n";
+            $html.= "     <a href=\"javascript:(0);\" class=\"dropdown-toggle\" data-toggle=\"dropdown\">\n";
             $html.= "         <i class=\"".$field["icono"]."\"></i>\n";
             $html.= "         <span>".$field["nombre"]."</span>\n";
             $html.= "         <b class=\"caret\"></b>\n";
@@ -161,6 +168,7 @@ public function buildMenu($parent){
             $html.= "</li>\n"; 
         }
     }
+    
     return $html;
 }
 
@@ -231,7 +239,10 @@ public function add_navigation($text, $url) {
 
 public function buildNavigationbar(){
     $xhtml = "";
+    
+    
     $total = count ($this->_navigationBar);
+    
     if ($total>0){
         $last = $total - 1;
         $xhtml.= "<div class=\"main\">\n";
@@ -252,6 +263,7 @@ public function buildNavigationbar(){
         $xhtml.= "  </div>\n";
         $xhtml.= "</div>\n";
     }
+    
     return $xhtml;
 }
 //**************************************************************************************

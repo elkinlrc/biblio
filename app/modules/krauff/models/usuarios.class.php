@@ -16,10 +16,13 @@ private $_genero;                   /* smallint, NOT NULL, DEFAULT 1, Domains CH
                                         2 Femenino */
 private $_nombreusuario;            //varchar(100), NOT NULL
 private $_clave;                    //varchar(50), NOT NULL
-private $_codempresa;
+private $_codcolegio;
 private $_ciudad;
 private $_pais;
 private $_clavesincifrar;                    //varchar(50), NOT NULL
+
+
+
 
 public function __construct(){}
 
@@ -38,10 +41,12 @@ public function set_fechanacimiento($value){$this->_fechanacimiento = $value;}
 public function set_genero($value){$this->_genero = $value;}
 public function set_nombreusuario($value){$this->_nombreusuario = $value;}
 public function set_clave($value){$this->_clave = $value;}
-public function set_codempresa($value){$this->_codempresa = $value;}
+public function set_codcolegio($value){$this->_codcolegio = $value;}
 public function set_ciudad($value){$this->_ciudad = $value;}
 public function set_pais($value){$this->_pais = $value;}
 public function set_clavesincifrar($value){$this->_clavesincifrar = $value;}
+
+
 
 //Getters
 public function get_codusuario(){return $this->_codusuario;}
@@ -58,9 +63,12 @@ public function get_fechanacimiento(){return $this->_fechanacimiento;}
 public function get_genero(){return $this->_genero;}
 public function get_nombreusuario(){return $this->_nombreusuario;}
 public function get_clave(){return $this->_clave;}
-public function get_codempresa(){return $this->_codempresa;}
+public function get_codcolegio(){return $this->_codcolegio;}
 public function get_ciudad(){return $this->_ciudad;}
 public function get_pais(){return $this->_pais;}
 public function get_clavesincifrar(){return $this->_clavesincifrar;}
+
+
+
 }//End class
 ?>

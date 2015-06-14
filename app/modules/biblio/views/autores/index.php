@@ -1,12 +1,14 @@
 <?php
 require("../../../../config/config.inc.php");
-$id_security= array("EVADOC_EVA_REA");
+
+$DOM["SECURITY_ID"] = array("MNTO_AUTOR");
+require("viewmanager/security.inc.php");
 
 $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);
 $page =$parametros->get_parameter("npage",0);
 $limit_numrows =$parametros->get_parameter("nrows",15);
-$parametros->add("SECURITY_ID","FALSE");
+//$parametros->add("SECURITY_ID","FALSE");
 
 $opcionBusqueda=$parametros->get_parameter("So","");
 $palabraBusqueda=$parametros->get_parameter("Sw","");

@@ -1,6 +1,7 @@
 <?php
 require("../../../../config/config.inc.php");
-$id_security= array("EVADOC_EVA_REA");
+$DOM["SECURITY_ID"] = array("MNTO_AUTOR");
+require("viewmanager/security.inc.php");
 
 $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);
@@ -9,7 +10,7 @@ $mensaje = $parametros->get_parameter("msg", 0);
 //***********************************************
 $Face = new Moon2_ViewManager_Controller();
 $Face->set_sysmenu(TRUE);
-$Face->set_type("OUTSIDE");
+$Face->set_type("INSIDE");
 $Face->set_name("Crear");
 
 $Face->add_navigation("Inicio", "index.php");

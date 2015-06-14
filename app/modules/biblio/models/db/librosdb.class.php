@@ -17,7 +17,7 @@ class Modules_Biblio_ModelDb_Librosdb extends Moon2_DBmanager_PDO{
          
         
         $where=" ";
-
+        $join="";
         $from = "FROM ".$this->_table." l ";
         if(isset($Data["busqueda"])){
             $where = $this->get_where($Data["busqueda"]);

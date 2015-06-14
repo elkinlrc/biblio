@@ -1,13 +1,13 @@
 <?php
-if (!isset($id_security)) {
+if (!isset($DOM["SECURITY_ID"])) {
     echo "<h1>MOON2 Message:<br />Can not call view, requires the view controller</h1>";
     exit();
 }
 ?>
 <div class="main">
-    <div class="container">
+    <div class="container well">
         <div class="row">
-            <div class="span12">
+            <div class="col-md-12">
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
@@ -66,10 +66,10 @@ if (!isset($id_security)) {
                                 <?php
                                 foreach ($registros as $indice => $campo) {
 
-                                    $parametros->add("action", "eliminar");
+                                  //  $parametros->add("action", "eliminar");
                                     $parametros->add("controller", "Modules_Biblio_Controllers_LibrosController");
                                     $parametros->add("codigo", $campo["codlibro"]);
-                                    $parametros->add("SECURITY_ID", "FALSE");
+                                    //$parametros->add("SECURITY_ID", "FALSE");
                                     $url_actualizar = $parametros->keyGen();
 
                                     echo "<tr>";

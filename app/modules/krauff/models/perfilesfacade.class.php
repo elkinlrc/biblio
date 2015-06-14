@@ -40,6 +40,9 @@ public function comboperfiles(){
     return $this->_perfilesDB->comboperfiles();
 }
 
+public function combotablas(){
+    return $this->_perfilesDB->combotablas();
+}
 // END: User-defined methods
 
 }//End class

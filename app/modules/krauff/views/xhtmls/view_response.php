@@ -7,8 +7,11 @@
         $message = utf8_encode(($_GET["msg"]));
     }
 ?>
-<div class="account-container stacked">
-    <div class="content clearfix">
+<br/><br/><br/>
+<div class="container  well">
+    
+    <div class="row">
+        <div class="col-md-12"  >
             <h1>Respuesta del Sistema</h1>		
             <div class="field">
                 <p><?php echo $message;?></p>
@@ -16,5 +19,6 @@
             <div>
                 <a class="btn btn-success" href="javascript:alert('email: jhonjairo.cortesp@live.com');">Información y Soporte</a>
             </div>
+        </div>
     </div> <!-- /content -->
 </div> <!-- /account-container -->

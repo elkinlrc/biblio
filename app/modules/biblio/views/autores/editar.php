@@ -1,7 +1,7 @@
 <?php
 require("../../../../config/config.inc.php");
-$DOM["SECURITY_ID"] = "*";
-
+$DOM["SECURITY_ID"] = array("MNTO_AUTOR");
+require("viewmanager/security.inc.php");
 $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);
 $mensaje = $parametros->get_parameter("msg", 0);

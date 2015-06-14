@@ -28,6 +28,11 @@ public function load_all(&$rsNumRows, $limit_numrows, $page, $Data=array()){
     return $this->_userDB->load_all($rsNumRows, $limit_numrows, $page, $Data);
 }
 
+public function load_all_tecnicos(&$rsNumRows, $limit_numrows, $page, $Data=array()){
+    return $this->_userDB->load_all_tecnicos($rsNumRows, $limit_numrows, $page, $Data);
+    
+}
+
 public function load_all_admin(&$rsNumRows, $limit_numrows, $page, $Data=array()){
     return $this->_userDB->load_all_admin($rsNumRows, $limit_numrows, $page, $Data);
 }
@@ -42,6 +47,14 @@ public function load_all_clientes(&$rsNumRows, $limit_numrows, $page, $Data=arra
 public function load_all_clientes2(&$rsNumRows, $limit_numrows, $page, $Data=array()){
     return $this->_userDB->load_all_clientes2($rsNumRows, $limit_numrows, $page, $Data);
 }
+
+public function load_all_funcionarios(&$rsNumRows, $limit_numrows, $page, $Data=array()){
+    return $this->_userDB->load_all_funcionarios($rsNumRows, $limit_numrows, $page, $Data);
+}
+
+public function load_all_proveedores(&$rsNumRows, $limit_numrows, $page, $Data=array()){
+    return $this->_userDB->load_all_proveedores($rsNumRows, $limit_numrows, $page, $Data);
+}
 // END: Mandatory methods
 
 
@@ -52,6 +65,10 @@ public function validate($user, $pass){
 
 public function get_functionalities($id, $parentId){
     return $this->_userDB->get_functionalities($id, $parentId);
+}
+
+public function combotablas(){
+    return $this->_userDB->combotablas();
 }
 
 public function combousuarios(){
@@ -70,6 +87,22 @@ public function combomeseros2(){
     return $this->_userDB->combomeseros2();
 }
 
+public function combofuncionarios(){
+    return $this->_userDB->combofuncionarios();
+}
+
+
+public function combotecnicos(){
+    return $this->_userDB->combotecnicos();
+}
+
+public function comboproveedor(){
+    return $this->_userDB->comboproveedor();
+}
+
+public function validarpin($funcionario, $pin){
+        return $this->_userDB->validarpin($funcionario, $pin);
+    }
 
 // END: User-defined methods
 

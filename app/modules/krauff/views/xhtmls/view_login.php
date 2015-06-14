@@ -3,14 +3,19 @@
         echo "<h1>MOON2 Message:<br />Can not call view, requires the view controller</h1>";exit();
     }
 ?>
-<div class="account-container stacked">
-    <div class="content clearfix">
-	<form id="formID" class="formular" method="post" action="moon2.php" onSubmit="javascript:return verificar();">
+<div class="container stacked">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        
+<div class="panel panel-default">
+  <div class="panel-heading">Acceso al Sistema</div>
+  <div class="panel-body">
+    <form id="formID" class="formular" method="post" action="moon2.php" onSubmit="javascript:return verificar();">
             <input type="hidden" id="action" name="action" value="login" />
             <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="enabled" />
             <input type="hidden" id="controller" name="controller" value="krauff/usuarioscontroller" />
             <fieldset>
-            <h1>Acceso al Sistema</h1>		
+            
             <div class="login-fields">
                 <p>Ingreso Para Usuarios Registrados:</p>
                 <div class="field">
@@ -27,10 +32,14 @@
                 </div>		
             </div> <!-- /login-fields -->	
             <div class="form-actions">
+                <br/>
                 <button type="submit" class="btn btn btn-primary">Ingresar al Sistema</button>&nbsp;&nbsp;
                 <button type="reset" class="btn btn-info">Cancelar</button>
             </div>
             </fieldset>
         </form>	
+  </div>
+</div>
+	
     </div> <!-- /content -->
 </div> <!-- /account-container -->

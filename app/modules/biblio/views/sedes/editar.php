@@ -1,6 +1,8 @@
 <?php
 require("../../../../config/config.inc.php");
-$id_security= array("EVADOC_EVA_REA");
+$DOM["SECURITY_ID"]=array("MNTO_SEDES");
+require("viewmanager/security.inc.php");
+
 
 $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);

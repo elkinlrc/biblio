@@ -12,13 +12,13 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
 
     public function validate($user, $pass) {
         $parameters = array($user, $pass);
-        $sql = "SELECT u.codusuario, u.codperfil, u.nombreusuario, (u.nombres) as nombrecompleto, p.nombreperfil, e.codempresa, e.regimen, pa.tipopos, pa.impresionfactura ";
-        $sql.="FROM {$this->_table} u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa INNER JOIN parametros pa ON e.codempresa = pa.codempresa ";
-        $sql.="WHERE u.nombreusuario=? AND u.clave=? AND u.codperfil NOT IN(3,4)";
+        $sql = "SELECT u.codusuario, u.codperfil, u.nombreusuario, (u.nombres) as nombrecompleto, p.nombreperfil ";
+        $sql.="FROM {$this->_table} u INNER JOIN perfiles p ON u.codperfil = p.codperfil ";
+        $sql.="WHERE u.nombreusuario=? AND u.clave=? ";
         $row = $this->GetRow($sql, $parameters);
 
         if (!empty($row)) {
-            $key_user = $row["codusuario"] . "@" . $user . "@" . $row["nombrecompleto"] . "@" . $row["nombreperfil"] . "@" . $row["codperfil"] . "@" . $row["codempresa"] . "@" . $row["regimen"] . "@" . $row["tipopos"] . "@" . $row["impresionfactura"];
+            $key_user = $row["codusuario"] . "@" . $user . "@" . $row["nombrecompleto"] . "@" . $row["nombreperfil"] . "@" . $row["codperfil"] . "@" . $row["codcolegio"] . "@" . $row["regimen"];
             return $key_user;
         }
         return false;
@@ -60,36 +60,114 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql = "SELECT count(*) ";
+        $sql ="SELECT count(*) ";
         $sql.="FROM usuarios ";
-        $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} ";
+        //$sql.="WHERE codcolegio = {$this->_DOM["COLEGIO_ID"]} ";
         $rsNumRows = $this->GetOne($sql);
 
         if (empty($caja_campos) && empty($caja_busqueda)) {
             $sql = "SELECT p.nombreperfil, u.codusuario, u.genero, (u.nombres) AS nombres, u.tipodoc, u.documento, u.nombreusuario ";
-            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-            $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil not in (3, 4) ";
+            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN  ";
+            $sql.=" ";
             $sql.= $order;
             $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             return $arr;
         } else {
             if ($combo_campos == "codusuario") {
                 $sql = "SELECT p.nombreperfil, u.codusuario, u.genero, (u.nombres) AS nombres, u.tipodoc, u.documento, u.nombreusuario ";
-                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil not in (3, 4) ";
+                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN colegios c ON u.codcolegio = c.codcolegio ";
+                $sql.="WHERE   {$combo_campos} = '{$caja_busqueda}' and u.codperfil  ";
                 $sql.= $order;
                 $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             } else {
                 $sql = "SELECT p.nombreperfil, u.codusuario, u.genero, (u.nombres) AS nombres, u.tipodoc, u.documento, u.nombreusuario ";
-                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil not in (3, 4) ";
+                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil  ";
+                $sql.="WHERE   {$combo_campos} ilike '%{$caja_busqueda}%'  ";
                 $sql.= $order;
                 $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             }
             return $arr;
         }
     }
+    
+    
+    public function load_all_tecnicos(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
+        $combo_campos = $Data["nomcampos"];
+        $caja_busqueda = $Data["buscar"];
+        $From = "FROM {$this->_table} u";
+        $where = $this->get_where($Data["search"]);
+        $order = " ORDER BY " . $Data["order"] . " ASC";
 
+        $sql ="SELECT count(*) ";
+        $sql.="FROM usuarios ";
+        $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} AND codperfil = 2 ";
+        $rsNumRows = $this->GetOne($sql);
+
+        if (empty($caja_campos) && empty($caja_busqueda)) {
+            $sql = "SELECT u.codusuario, (u.nombres) AS nombretecnico, u.tipodoc, u.documento, u.celular, u.direccion, u.telefono ";
+            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
+            $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 2 ";
+            $sql.= $order;
+            $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            return $arr;
+        } else {
+            if ($combo_campos == "codusuario") {
+                $sql = "SELECT u.codusuario, (u.nombres) AS nombretecnico, u.tipodoc, u.documento, u.celular, u.direccion, u.telefono ";
+                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
+                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil = 2 ";
+                $sql.= $order;
+                $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            } else {
+                $sql = "SELECT u.codusuario, (u.nombres) AS nombretecnico, u.tipodoc, u.documento, u.celular, u.direccion, u.telefono ";
+                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
+                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil = 2 ";
+                $sql.= $order;
+                $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            }
+            return $arr;
+        }
+    }
+    
+    
+    
+      public function load_all_funcionarios(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
+        $combo_campos = $Data["nomcampos"];
+        $caja_busqueda = $Data["buscar"];
+        $From = "FROM {$this->_table} u";
+        $where = $this->get_where($Data["search"]);
+        $order = " ORDER BY " . $Data["order"] . " ASC";
+
+        $sql ="SELECT count(*) ";
+        $sql.="FROM usuarios ";
+        $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} and codperfil = 3 ";
+        $rsNumRows = $this->GetOne($sql);
+
+        if (empty($caja_campos) && empty($caja_busqueda)) {
+            $sql = "SELECT u.codusuario, (u.nombres) AS nombrefuncionario, u.documento, (d.nombre) As nombredependencia , (e.nombre) As nombreempresa ";
+            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa INNER JOIN dependencias d ON d.coddependencia = u.coddependencia ";
+            $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 3 ";
+            $sql.= $order;
+            $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            return $arr;
+        } else {
+            if ($combo_campos == "codusuario") {
+                $sql ="SELECT u.codusuario, (u.nombres) AS nombrefuncionario, u.documento, (d.nombre) As nombredependencia , (e.nombre) As nombreempresa ";
+                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa INNER JOIN dependencias d ON d.coddependencia = u.coddependencia ";
+                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil = 3 ";
+                $sql.= $order;
+                $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            } else {
+                $sql = "SELECT u.codusuario, (u.nombres) AS nombrefuncionario, u.documento, (d.nombre) As nombredependencia , (e.nombre) As nombreempresa ";
+                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa INNER JOIN dependencias d ON d.coddependencia = u.coddependencia ";
+                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil = 3 ";
+                $sql.= $order;
+                $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            }
+            return $arr;
+        }
+    }
+    
+    
     public function load_all_admin(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
         $combo_campos = $Data["nomcampos"];
         $caja_busqueda = $Data["buscar"];
@@ -97,36 +175,36 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql = "SELECT count(*) ";
+        $sql ="SELECT count(*) ";
         $sql.="FROM usuarios ";
-        $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} ";
+        $sql.="WHERE codcolegio = {$this->_DOM["COLEGIO_ID"]} ";
         $rsNumRows = $this->GetOne($sql);
 
         if (empty($caja_campos) && empty($caja_busqueda)) {
             $sql = "SELECT p.nombreperfil, u.codusuario, u.genero, (u.nombres) AS nombres, u.tipodoc, u.documento, u.nombreusuario ";
-            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-            $sql.="WHERE u.codperfil not in (3, 4) ";
+            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN colegios c ON u.codcolegio = c.codcolegio ";
+            $sql.="WHERE c.codcolegio = {$this->_DOM["COLEGIO_ID"]} and u.codperfil not in (3, 4) ";
             $sql.= $order;
             $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             return $arr;
         } else {
             if ($combo_campos == "codusuario") {
                 $sql = "SELECT p.nombreperfil, u.codusuario, u.genero, (u.nombres) AS nombres, u.tipodoc, u.documento, u.nombreusuario ";
-                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil not in (3, 4) ";
+                 $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN colegios c ON u.codcolegio = c.codcolegio ";
+                $sql.="WHERE c.codcolegio = {$this->_DOM["COLEGIO_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil not in (3, 4) ";
                 $sql.= $order;
                 $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             } else {
                 $sql = "SELECT p.nombreperfil, u.codusuario, u.genero, (u.nombres) AS nombres, u.tipodoc, u.documento, u.nombreusuario ";
-                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil not in (3, 4) ";
+                 $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN colegios c ON u.codcolegio = c.codcolegio ";
+                $sql.="WHERE c.codcolegio = {$this->_DOM["COLEGIO_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil not in (3, 4) ";
                 $sql.= $order;
                 $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             }
             return $arr;
         }
     }
-
+    
     public function load_all_meseros(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
         $combo_campos = $Data["nomcampos"];
         $caja_busqueda = $Data["buscar"];
@@ -134,7 +212,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql = "SELECT count(*) ";
+        $sql ="SELECT count(*) ";
         $sql.="FROM usuarios ";
         $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} and codperfil = 1 ";
         $rsNumRows = $this->GetOne($sql);
@@ -163,14 +241,15 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
             return $arr;
         }
     }
-
+    
     public function load_all_clientes(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
         $combo_campos = $Data["nomcampos"];
         $caja_busqueda = $Data["buscar"];
         $From = "FROM {$this->_table} u";
+        $where = $this->get_where($Data["search"]);
         $order = " ORDER BY " . $Data["order"] . " ASC";
 
-        $sql = "SELECT count(*) ";
+        $sql ="SELECT count(*) ";
         $sql.="FROM usuarios ";
         $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} and codperfil = 4 ";
         $rsNumRows = $this->GetOne($sql);
@@ -183,54 +262,66 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
             $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             return $arr;
         } else {
-            $where = $this->get_where($Data["search"]);
-            $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.celular, u.direccion, u.tipodoc ";
-            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-            $sql.= $where . " AND e.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 4 and u.codusuario <> -2 ";
-            $sql.= $order;
-            $arr = $this->SelectLimit($sql, $limit_numrows, $page);
-            return $arr;
-        }
-        
-    }
-
-    public function load_all_clientes2(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
-        $combo_campos = $Data["nomcampos"];
-        $caja_busqueda = $Data["buscar"];
-        $From = "FROM {$this->_table} u";
-        $where = $this->get_where($Data["search"]);
-        $order = " ORDER BY " . $Data["order"] . " ASC";
-
-        $sql = "SELECT count(*) ";
-        $sql.="FROM usuarios ";
-        $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} and codperfil = 4 ";
-        $rsNumRows = $this->GetOne($sql);
-
-        if (empty($caja_campos) && empty($caja_busqueda)) {
-            $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.telefono, u.direccion, u.tipodoc ";
-            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-            $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 4 ";
-            $sql.= $order;
-            $arr = $this->SelectLimit($sql, $limit_numrows, $page);
-            return $arr;
-        } else {
             if ($combo_campos == "codusuario") {
-                $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.telefono, u.direccion, u.tipodoc ";
+                $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.celular, u.direccion, u.tipodoc ";
                 $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil = 4 ";
+                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil = 4 and u.codusuario <> -2 ";
                 $sql.= $order;
                 $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             } else {
-                $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.telefono, u.direccion, u.tipodoc ";
+                $sql = "SELECT u.codusuario, (u.nombres) AS nombrecliente, u.documento, u.celular, u.direccion, u.tipodoc ";
                 $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
-                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil = 4 ";
+                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil = 4 and u.codusuario <> -2 ";
                 $sql.= $order;
                 $arr = $this->SelectLimit($sql, $limit_numrows, $page);
             }
             return $arr;
         }
     }
+    
+    
+    
+      
+    public function load_all_proveedores(&$rsNumRows, $limit_numrows, $page, $Data = array()) {
+        $combo_campos = $Data["nomcampos"];
+        $caja_busqueda = $Data["buscar"];
+        $From = "FROM {$this->_table} u";
+        $where = $this->get_where($Data["search"]);
+        $order = " ORDER BY " . $Data["order"] . " ASC";
 
+        $sql ="SELECT count(*) ";
+        $sql.="FROM usuarios ";
+        $sql.="WHERE codempresa = {$this->_DOM["EMPRESA_ID"]} and codperfil = 5 ";
+        $rsNumRows = $this->GetOne($sql);
+
+        if (empty($caja_campos) && empty($caja_busqueda)) {
+            $sql = "SELECT u.codusuario, (u.nombres) AS nombreproveedor, u.documento, u.celular, u.direccion, u.documento, u.correo ,u.telefono ";
+            $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
+            $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 5  ";
+            $sql.= $order;
+            $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            return $arr;
+        } else {
+            if ($combo_campos == "codusuario") {
+                $sql = "SELECT u.codusuario, (u.nombres) AS nombreproveedor, u.documento, u.celular, u.direccion, u.documento, u.correo , u.telefono ";
+                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
+                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} = '{$caja_busqueda}' and u.codperfil = 5 ";
+                $sql.= $order;
+                $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            } else {
+                $sql = "SELECT u.codusuario, (u.nombres) AS nombreproveedor, u.documento, u.celular, u.direccion, u.documento ,u.correo, u.telefono ";
+                $sql.="FROM usuarios u INNER JOIN perfiles p ON u.codperfil = p.codperfil INNER JOIN empresas e ON u.codempresa = e.codempresa ";
+                $sql.="WHERE e.codempresa = {$this->_DOM["EMPRESA_ID"]} and {$combo_campos} ilike '%{$caja_busqueda}%' and u.codperfil = 5 ";
+                $sql.= $order;
+                $arr = $this->SelectLimit($sql, $limit_numrows, $page);
+            }
+            return $arr;
+        }
+    }
+    
+    
+    
+    
     public function combousuarios() {
         $sql = "SELECT u.codusuario, (u.nombres||' '||u.primerapellido||' '||u.segundoapellido) AS nombrecliente ";
         $sql.= "FROM usuarios u INNER JOIN empresas e ON u.codempresa = e.codempresa ";
@@ -238,13 +329,22 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $funcArray = $this->GetAssoc($sql);
         return $funcArray;
     }
-
-    public function asignarfuncionalidades($codusuario) {
+    
+    public function combotablas() {
+        $sql = "SELECT column_name as llave, column_name as valor ";
+        $sql.="FROM information_schema.columns ";
+        $sql.="WHERE table_name = 'usuarios' and column_name IN ( 'documento', 'nombres') ";
+        $funcArray = $this->GetAssoc($sql);
+        return $funcArray;
+    }
+    
+    
+     public function asignarfuncionalidades($codusuario) {
         $sql = "INSERT into rel_funcusuarios (codusuario, codfunc) select {$codusuario},codfunc FROM funcionalidades ";
         $funcArray = $this->ExecuteSql($sql);
         return $funcArray;
     }
-
+    
     public function combomeseros() {
         $sql = "SELECT u.codusuario, (u.nombres) AS nombremeseros ";
         $sql.= "FROM usuarios u ";
@@ -252,7 +352,7 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $funcArray = $this->GetAssoc($sql);
         return $funcArray;
     }
-
+    
     public function combomeseros2() {
         $sql = "SELECT u.codusuario ";
         $sql.= "FROM usuarios u ";
@@ -260,8 +360,48 @@ class Modules_Krauff_ModelDb_usuariosdb extends Moon2_DBmanager_PDO {
         $funcArray = $this->GetOne($sql);
         return $funcArray;
     }
+    
+    
+     public function combofuncionarios() {
+        $sql = "SELECT u.codusuario, u.nombres AS nombrefuncionario ";
+        $sql.= "FROM usuarios u ";
+        $sql.= "WHERE u.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 3 ";
+        $arrayfuncionarios = $this->GetAssoc($sql);
+        return $arrayfuncionarios;
+    } 
+    
+    
+    public function combotecnicos() {
+        $sql = "SELECT u.codusuario, u.nombres AS nombrefuncionario ";
+        $sql.= "FROM usuarios u ";
+        $sql.= "WHERE u.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 2 ";
+        $arrayfuncionarios = $this->GetAssoc($sql);
+        return $arrayfuncionarios;
+    }
+    
+    
+    public function comboproveedor() {
+        $sql = "SELECT u.codusuario, u.nombres AS nombrefuncionario ";
+        $sql.= "FROM usuarios u ";
+        $sql.= "WHERE u.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 5 ";
+        $arrayfuncionarios = $this->GetAssoc($sql);
+        return $arrayfuncionarios;
+    }
+    
+     public function validarpin($funcionario, $pin) {
+        $parameters = array($funcionario, $pin);
+        $sql = "SELECT u.codusuario, u.pinencriptado ";
+        $sql.="FROM usuarios u ";
+        $sql.="WHERE u.codusuario=? AND u.pinencriptado=? AND u.codempresa = {$this->_DOM["EMPRESA_ID"]} and u.codperfil = 3 ";
+        $row = $this->GetRow($sql, $parameters);
 
+        if (!empty($row)) {
+            return true;
+        }
+        return false;
+    }
 }
+
 
 //End class
 ?>

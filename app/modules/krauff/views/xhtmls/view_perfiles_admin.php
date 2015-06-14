@@ -21,19 +21,19 @@
                     <form id="frm_perfiles" method="post" action="moon2.php" onSubmit="javascript:return checkform('frm_perfiles');"> 
                         <input type="hidden" id="action" name="action" value="buscar" />
                         <input type="hidden" id="controller" name="controller" value="krauff/perfilescontroller" />
-                        <div class="table-responsive">
                         <table border="0" wedth="95%" class="table table-hover table-condensed">
                             <tr>
                                 <td width="65%"><p class="news-item-preview">&nbsp;<?php echo $Paginador->showDetails();?></p></td>
-                                <td width="5%"><?php echo $Formulario->addObject("MenuList", "nomcampos", $DOM["COMBOPERFILES"], $combo_campos, "onchange=\"javascript:limpiarbusqueda();\"class='form-control' style='cursor:pointer;'") ?></td>
+                                <td width="5%"><?php echo $Formulario->addObject("MenuList", "nomcampos", $arr_nomperfiles, $combo_campos, "onchange='javascript:limpiarbusqueda();' class='form-control' style='cursor:pointer;'") ?></td>
                                 <td><input type="text" class="form-control validate[required,minSize[1],maxSize[30]]" id="buscar" name="buscar" size="40" value="<?php echo $caja_busqueda;?>" /></td>
                                 <td><button class="btn btn-success" type="submit" tabindex="11">Buscar</button></td>
                             </tr>
                         </table>
-                        </div>
                         <!--<?php print_r($arr_nomperfiles);?>-->
                     </form>          
                     <!--Finaliza el Buscador de Registros--> 
+                        
+                        
                         <div class="table-responsive">
                             <table id="melleva" class="table table-bordered table-hover table-highlight">
                                 <?php echo $Face->headerTable($arr_cabeceras_tabla, $order, $Params);?>
@@ -62,8 +62,8 @@
                                             $xhtml.= "<td>";
                                             $xhtml.= "  <div class=\"btn-toolbar\">";
                                             $xhtml.= "  <div class=\"btn-group\">";
-                                            $xhtml.= "   <a title=\"Editar perfil\" class=\"btn btn-default abrir_flotante\" href=\"perfiles_editar.php?{$params_actualizar}\"><i class=\"icon-edit\"></i></a>";
-                                            $xhtml.= "   <a title=\"Eliminar Perfil: {$nombre_perfil}\" class=\"btn btn-default msgbox-confirm\" href=\"{$params_eliminar}\"><i class=\"icon-trash\"></i></a>";
+                                            $xhtml.= "   <a title=\"Actualizar perfil\" class=\"btn btn-default abrir_flotante\" href=\"perfiles_editar.php?{$params_actualizar}\"><i class=\"icon-edit\"></i></a>";
+                                            $xhtml.= "   <a title=\"Perfil: {$nombre_perfil}\" class=\"btn btn-default msgbox-confirm\" href=\"{$params_eliminar}\"><i class=\"icon-trash\"></i></a>";
                                             $xhtml.= "  </div>";
                                             $xhtml.= "  </div>";
                                             $xhtml.= "</td>";

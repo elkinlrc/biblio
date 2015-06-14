@@ -172,27 +172,13 @@ class Modules_Biblio_Controllers_LibrosController {
         header("Location: {$ruta}{$vista}{$cadenaurl}"); //Arma la ruta
     }
 
-    private function clonar() {
-        $obj = new Modules_Biblio_Model_Libros();
-        $objo = $this->_parameters->set_object($obj);
-        $facade = new Modules_Biblio_Model_LibrosFacade();
-        $mensaje = 32;
-        if ($facade->update($objo)) {
-
-
-            $mensaje = 12;
-        }
-        $this->_parameters->delete_all();
-        $this->_parameters->add("msg", $mensaje);
-        $this->_parameters->add("codigo", $obj->get_codlibro());
-
-        $cadenaurl = $this->_parameters->KeyGen();
-        $ruta = $this->_pathConfig["ROOT"]["modules"];
-        $vista = "/biblio/views/" . $this->_module . "/clonar.php?";
-        header("Location: {$ruta}{$vista}{$cadenaurl}"); //Arma la ruta
-    }
+    
     public function verLibro(){
+        $obj = 
         
+        
+        $vista = "/biblio/views/" . $this->_module . "/libro.php?";
+        header("Location: {$ruta}{$vista}{$cadenaurl}"); //Arma la ruta
         
     }
 

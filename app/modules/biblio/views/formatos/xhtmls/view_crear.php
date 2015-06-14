@@ -1,17 +1,17 @@
 <?php
-if (!isset($id_security)) {
+if (!isset($DOM["SECURITY_ID"])) {
     echo "<h1>MOON2 Message:<br />Can not call view, requires the view controller</h1>";
     exit();
 }
 ?>
 <div class="main">
-    <div class="container">
+    <div class="container well">
         <div class="row">
-            <div class="span12">
+            <div class="col-md-12">
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
-                        <h3>Crear Autor</h3>
+                        <h3>Crear Formatos</h3>
                     </div>
                     <div class="widget-content">
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">

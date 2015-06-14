@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //Inclusiones obligatorias, primero el FrameWork y segundo el identificador de seguridad
 require("../../../config/config.inc.php");
 $DOM["SECURITY_ID"] = array("MNTO_USU");
@@ -27,14 +27,14 @@ $FacadePerfil = new Modules_Krauff_Model_PerfilesFacade();
 $arr_perfiles = $FacadePerfil->comboperfiles();
 
 //Combo de Empresas
-$FacadeEmpresas = new Modules_Pos_Model_EmpresasFacade();
-$arrayEmpresa = $FacadeEmpresas->combo_empresa();
+$FacadeColegios = new Modules_Pensiones_Model_ColegiosFacade();
+$arrayEmpresa = $FacadeColegios->combo();
 
 //Gestor de la página
 $Face = new Moon2_ViewManager_Controller();
 $Face->set_name("Editar Perfil");
 $Face->set_component("Mantenimiento Tablas");
-$Face->add_javascript("../js/usuarios_flotantes.js");
+$Face->add_javascript("../js/perfiles_flotantes.js");
 $Face->set_type("INSIDE");
 $Face->set_sysmenu(true);
 $Face->add_navigation("Usuarios", "#");

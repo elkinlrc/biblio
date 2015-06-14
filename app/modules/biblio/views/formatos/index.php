@@ -1,12 +1,14 @@
 <?php
 require("../../../../config/config.inc.php");
-$id_security= array("EVADOC_EVA_REA");
+$DOM["SECURITY_ID"] = array("MNTO_FORMA");
+require("viewmanager/security.inc.php");
+
 
 $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);
 $page =$parametros->get_parameter("npage",0);
 $limit_numrows =$parametros->get_parameter("nrows",15);
-$parametros->add("SECURITY_ID","FALSE");
+//$parametros->add("SECURITY_ID","FALSE");
 
 $opcionBusqueda=$parametros->get_parameter("So","");
 $palabraBusqueda=$parametros->get_parameter("Sw","");
@@ -32,11 +34,11 @@ $facade->add_searchField("2","a.nombre");
 
 $Face = new Moon2_ViewManager_Controller();
 $Face->set_sysmenu(TRUE);
-$Face->set_type("OUTSIDE");
-$Face->set_name("Listar Autores ");
+$Face->set_type("INSIDE");
+$Face->set_name("Listar Formatos ");
 
 $Face->add_navigation("Inicio", "index.php");
-$Face->add_navigation("Listar Autores", "#");
+$Face->add_navigation("Listar Formatos", "#");
 
 
 

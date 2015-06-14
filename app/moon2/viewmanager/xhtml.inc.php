@@ -18,7 +18,13 @@ function xhtml_header_styles($paths, $theme, $stylesOut){
     $path = $paths["ROOT"]["moon"]."/themes/{$theme}/css/";
     $styles = array();
     $styles[] = "bootstrap.min.css";
-    $styles[] = "bootstrap-responsive.min.css";
+    //$styles[] = "bootstrap.min.css";
+    $styles[] = "roboto.min.css";
+    $styles[] =    "material-fullpalette.min.css";
+    $styles[] =    "ripples.min.css";
+    $styles[] =    "snackbar.min.css";
+    $styles[] =    "jquery.dropdown.css";
+   // $styles[] = "bootstrap-responsive.min.css";
     $styles[] = "font-awesome.min.css";
  //   $styles[] = "base-admin-3.css";
     //$styles[] = "ui-lightness/jquery-ui-1.10.0.custom.min.css";
@@ -67,6 +73,9 @@ function xhtml_header_javascripts($paths, $theme, $javafiles){
     $javas[] = $path."plugins/msgGrowl/js/msgGrowl.js";
     //$javas[] = $path."plugins/lightbox/jquery.lightbox.min.js";
     $javas[] = $path."plugins/msgbox/jquery.msgbox.js";
+    $javas[] = $path."jquery.dropdown.js";
+    $javas[] = $path."material.min.js";
+    $javas[] = $path."ripples";
     $javas[] = $path."plugins/tooltip/bootstrap-tooltip.js";
     $javas[] = $path."plugins/tooltip/bootstrap-popover.js";
     //Calendar begin
@@ -96,14 +105,14 @@ function xhtml_global_java($path){
     return $html;
 }
 
-function xhtml_body_open($type, $dataPath, $dataDomain){
+function xhtml_body_open($type, $dataPath, $dataDomain,$menuHtml=''){
     $html ="";
     $pathModules = $dataPath["ROOT"]["modules"];
     switch ($type){
         case "OUTSIDE":
             $login = $dataPath["QUIT"]."/login.php";
             $html = "<body>\n";
-            $html.= "<nav role=\"navigation\" class=\"navbar navbar-inverse\">\n";
+            $html.= "<nav role=\"navigation\" class=\"navbar navbar-default navbar-fixed-top \">\n";
             $html.= "   <div class=\"container\">\n";
             $html.= "       <div class=\"navbar-header\">\n";
             $html.= "           <button data-target=\".navbar-ex1-collapse\" data-toggle=\"collapse\" class=\"navbar-toggle\" type=\"button\">\n";
@@ -112,8 +121,9 @@ function xhtml_body_open($type, $dataPath, $dataDomain){
             $html.= "               <span class=\"icon-bar\"></span>\n";
             $html.= "               <span class=\"icon-bar\"></span>\n";
             $html.= "           </button>\n";
-            $html.= "           <a href=\"{$pathModules}/outside/views/index.php\" class=\"navbar-brand\">".$dataDomain["SYSTEMNAME"]."</a>\n";
+            $html.= "           <a href=\"{$pathModules}/biblio/views/index.php\" class=\"navbar-brand\">".$dataDomain["SYSTEMNAME"]."</a>\n";
             $html.= "       </div>";
+            $html.= "       ";
             $html.= "       <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\n";
             $html.= "           <ul class=\"nav navbar-nav navbar-right\">\n";
             $html.= "               <li class=\"\">\n";
@@ -130,39 +140,38 @@ function xhtml_body_open($type, $dataPath, $dataDomain){
         break;
         case "INSIDE":
             $quit = $dataPath["QUIT"]."/response.php?msg=".urlencode("Sesion finalizada correctamente");
-            $html = "<body>\n";
-            $html.= "<nav role=\"navigation\" class=\"navbar navbar-inverse\">\n";
-            $html.= "   <div class=\"container\">\n";
-            $html.= "       <div class=\"navbar-header\">\n";
-            $html.= "           <button data-target=\".navbar-ex1-collapse\" data-toggle=\"collapse\" class=\"navbar-toggle\" type=\"button\">\n";
-            $html.= "               <span class=\"sr-only\">Toggle navigation</span>\n";
-            $html.= "               <i class=\"icon-cog\"></i>\n";
-            $html.= "           </button>\n";
-            $html.= "           <a href=\"{$pathModules}/main/views/index.php\" class=\"navbar-brand\">".$dataDomain["SYSTEMNAME"]."</a>\n";
-            $html.= "       </div>\n";
-            $html.= "       <div class=\"collapse navbar-collapse navbar-ex1-collapse\">\n";
-            $html.= "           <ul class=\"nav navbar-nav navbar-right\">\n";
-            $html.= "               <li class=\"dropdown\">\n";
-            $html.= "                   <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" href=\"javscript:;\">\n";
-            $html.= "                       <i class=\"icon-user\"></i> ".$dataDomain["FULLUSER_NAME"]."\n";
-            $html.= "                       <b class=\"caret\"></b>\n";
-            $html.= "                   </a>\n";
-            $html.= "                   <ul class=\"dropdown-menu\">\n";
-            $html.= "                       <li><a href=\"javascript:;\">Mi perfil</a></li>\n";
-            $html.= "                       <li><a href=\"javascript:;\">Comentarios</a></li>\n";
-            $html.= "                       <li><a href=\"javascript:;\">Ayuda</a></li>\n";
-            $html.= "                       <li class=\"divider\"></li>\n";
-            $html.= "                       <li><a href=\"".$quit."\">Cerrar Sesión</a></li>\n";
-            $html.= "                   </ul>\n";
-            $html.= "               </li>\n";
-            $html.= "           </ul>\n";
-            $html.= "       </div><!-- /.navbar-collapse -->\n";
-            $html.= "   </div> <!-- /.container -->\n";
-            $html.= "</nav>\n";
+            $html="<div class=\"navbar navbar-default\">
+                                <div class=\"navbar-header\">
+                                    <button data-target=\".navbar-responsive-collapse\" data-toggle=\"collapse\" class=\"navbar-toggle\" type=\"button\">
+                                        <span class=\"icon-bar\"></span>
+                                        <span class=\"icon-bar\"></span>
+                                        <span class=\"icon-bar\"></span>
+                                    </button>
+                                    <a href=\"{$pathModules}/biblio/views/index.php\" class=\"navbar-brand\">".$dataDomain["SYSTEMNAME"]."<div class=\"ripple-wrapper\"></div></a>
+                                </div>
+                                <div class=\"navbar-collapse collapse navbar-responsive-collapse\">
+                                    <ul class=\"nav navbar-nav\">
+                                      ".$menuHtml."
+                                    </ul>
+                                    <ul class=\"nav navbar-nav navbar-right\">
+                                        
+                                        <li class=\"dropdown\">
+                                            <a data-toggle=\"dropdown\" class=\"dropdown-toggle\" data-target=\"#\" href=\"bootstrap-elements.html\">".$dataDomain["FULLUSER_NAME"]." <b class=\"caret\"></b></a>
+                                            <ul class=\"dropdown-menu\">
+                                                <li><a href=\"javascript:void(0)\">Mi Perfil</a></li>
+                                                <li><a href=\"javascript:void(0)\">Cambiar Contraseña</a></li>
+                                                
+                                                <li class=\"divider\"></li>
+                                                <li><a href=\"{$quit}\">Cerrar Sesión</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>";
         break;
         default:
             $html = "<body>\n";
-            $html.= "<nav role=\"navigation\" class=\"navbar navbar-inverse\">\n";
+            $html.= "<nav role=\"navigation\" class=\"navbar navbar-default\">\n";
             $html.= "   <div class=\"container\">\n";
             $html.= "       <div class=\"navbar-floatm\">\n";
             $html.= "           ".$dataDomain["SYSTEMNAME"]."\n";
@@ -182,7 +191,7 @@ function xhtml_menu($section, $mainPath, $defaultComponent){
     }
     switch ($section){
         case "header":
-            $html.= "<div class=\"subnavbar\">\n";
+            $html.= "<div class=\"subnavbar \">\n";
             $html.= "  <div class=\"subnavbar-inner\">\n";
             $html.= "    <div class=\"container\">\n";	
             $html.= "        <a class=\"btn-subnavbar collapsed\" data-toggle=\"collapse\" data-target=\".subnav-collapse\">\n";
@@ -197,6 +206,8 @@ function xhtml_menu($section, $mainPath, $defaultComponent){
             $html.= "                    </a>\n"; 				
             $html.= "                </li>\n";
         break;
+        
+      
         case "footer":
             $html.= "            </ul>\n";
             $html.= "        </div> <!-- /.subnav-collapse -->\n";

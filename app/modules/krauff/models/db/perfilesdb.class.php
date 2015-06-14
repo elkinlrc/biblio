@@ -54,6 +54,14 @@ class Modules_Krauff_ModelDb_PerfilesDb extends Moon2_DBmanager_PDO {
         return $funcArray;
     }
 
+    public function combotablas() {
+        $sql = "SELECT column_name as llave, column_name as valor ";
+        $sql.="FROM information_schema.columns ";
+        $sql.="WHERE table_name = 'perfiles';";
+        $funcArray = $this->GetAssoc($sql);
+        return $funcArray;
+    }
+
 }
 
 //End class

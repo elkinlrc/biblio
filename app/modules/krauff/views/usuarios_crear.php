@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 //Inclusiones obligatorias, primero el FrameWork y segundo el identificador de seguridad
 require("../../../config/config.inc.php");
 $DOM["SECURITY_ID"] = array("MNTO_USU");
@@ -31,8 +31,8 @@ $FacadePerfiles = new Modules_Krauff_Model_PerfilesFacade();
 $arr_perfiles = $FacadePerfiles->comboperfiles();
 
 //Combo de Empresas
-$FacadeEmpresas = new Modules_Pos_Model_EmpresasFacade();
-$arrayEmpresa = $FacadeEmpresas->combo_empresa();
+$FacadeColegios = new Modules_pensiones_Model_ColegiosFacade();
+$arraycolegio = $FacadeColegios->combo();
 
 //Despliegue de la página en xhtml
 echo $Face->open();

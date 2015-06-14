@@ -1,13 +1,13 @@
 <?php
-if (!isset($id_security)) {
+if (!isset($DOM["SECURITY_ID"])) {
     echo "<h1>MOON2 Message:<br />Can not call view, requires the view controller</h1>";
     exit();
 }
 ?>
 <div class="main">
-    <div class="container">
+    <div class="container well">
         <div class="row">
-            <div class="span12">
+            <div class="col-md-12">
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
@@ -27,59 +27,68 @@ if (!isset($id_security)) {
 
 
                                 </thead>
-                                <tbody> 
+                                <tbody>
                                     <tr>
+                                        <td rowspan="2" colspan="2"><img src="..." class="img-responsive" alt="Responsive image"></td>
                                         <td>Título</td>
                                         <td><input type="text" id="titulo" name="titulo" class="form-control validate[required, minSize[4]]" size="30" value=""/></td>
-
-                                        <td>Subtítulo</td>
-                                        <td><input type="text" id="subtitulo" name="subtitulo" class="form-control validate[required, minSize[4]]" size="30"/></td>
+                                        <td></td>
                                     </tr>
                                     <tr>
-                                        <td>Clasificación</td>
-                                        <td>
-                                            <?php
-                                            echo $formulario->addObject("MenuList", "codclasificacion", $comboClasificacion, "", "", "");
-                                            ?>
-                                        </td>
+                                        <td>Subtítulo</td>
+                                    <td><input type="text" id="subtitulo" name="subtitulo" class="form-control validate[required, minSize[4]]" size="30"/></td>
 
-                                        <td>Formato del libros</td>
-                                        <td>
-                                            <?php
-                                            echo $formulario->addObject("MenuList", "codformato", $comboFormatos, "", "", "");
-                                            ?>
-                                        </td>
-                                    </tr>
-                                    <?php
-                                    $form = "";
-                                    $i = 0;
-                                    $variable = "";
-                                    foreach ($registrosMetadatos as $indice => $campo) {
+                                    <t/>
+                                <tr>
 
 
-                                        $i = $i + 1;
-                                        $lbminimo = "";
-                                        $lbrequerido = "";
-                                        $minimo = $campo["minimo"];
-                                        $requerido = $campo["requerido"];
-                                        if ($minimo > 0) {
+                                    
+                                </tr>
+                                <tr>
+                                    <td>Clasificación</td>
+                                    <td>
+                                        <?php
+                                        echo $formulario->addObject("MenuList", "codclasificacion", $comboClasificacion, "", "class='form-control'", "");
+                                        ?>
+                                    </td>
 
-                                            $lbminimo = "minSize[" . $minimo . "]";
-                                        }
-                                        if ($requerido == "si") {
-                                            $lbrequerido = "required";
-                                        }
+                                    <td>Formato del libros</td>
+                                    <td>
+                                        <?php
+                                        echo $formulario->addObject("MenuList", "codformato", $comboFormatos, "", "class='form-control'", "");
+                                        ?>
+                                    </td>
+                                </tr>
+                                <?php
+                                $form = "";
+                                $i = 0;
+                                $variable = "";
+                                foreach ($registrosMetadatos as $indice => $campo) {
 
-                                        if ($i % 2 == 0) {
-                                            $form.="<tr>$variable<td>" . $campo["etiqueta"] . "</td><td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td></tr>";
-                                            $variable = "";
-                                        } else {
-                                            $variable.= "<td>" . $campo["etiqueta"] . "</td>";
-                                            $variable.= "<td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td>";
-                                        }
+
+                                    $i = $i + 1;
+                                    $lbminimo = "";
+                                    $lbrequerido = "";
+                                    $minimo = $campo["minimo"];
+                                    $requerido = $campo["requerido"];
+                                    if ($minimo > 0) {
+
+                                        $lbminimo = "minSize[" . $minimo . "]";
                                     }
-                                    echo $form;
-                                    ?>
+                                    if ($requerido == "si") {
+                                        $lbrequerido = "required";
+                                    }
+
+                                    if ($i % 2 == 0) {
+                                        $form.="<tr>$variable<td>" . $campo["etiqueta"] . "</td><td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td></tr>";
+                                        $variable = "";
+                                    } else {
+                                        $variable.= "<td>" . $campo["etiqueta"] . "</td>";
+                                        $variable.= "<td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td>";
+                                    }
+                                }
+                                echo $form;
+                                ?>
                             </table>
                             <ul class="nav nav-tabs">
                                 <li  class="active" ><a href="#home" data-toggle="tab">Cantidad</a></li>
@@ -106,10 +115,10 @@ if (!isset($id_security)) {
                                             <td ><input type="text" id="edicion" name="detalles[1][edicion]" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                             <td colspan="2">
                                                 <?php
-                                                echo $formulario->addObject("MenuList", "detalles[1][codsede]", $combosedes, "", "", "");
+                                                echo $formulario->addObject("MenuList", "detalles[1][codsede]", $combosedes, "", "class='form-control' ", "");
                                                 ?>
                                             </td >
-                                            
+
 
                                         </tr>
                                         </tr>
@@ -136,9 +145,9 @@ if (!isset($id_security)) {
 
                         </form>
                         <div id="combo" style="display: none">
-                             <?php
-                                                echo $formulario->addObject("MenuList", "detalles[1][codsede]", $combosedes, "", "", "");
-                                                ?>
+                            <?php
+                            echo $formulario->addObject("MenuList", "detalles[1][codsede]", $combosedes, "", "class='form-control'", "");
+                            ?>
                         </div>
                     </div> <!-- /widget-content -->
                 </div> <!-- /widget stacked -->
@@ -148,22 +157,22 @@ if (!isset($id_security)) {
 </div> <!-- /main -->
 <script>
     $(function () {
-        var c=1;
-       $(".tr_clone_add").on('click', function(){
-           c=c+1;
-       
+        var c = 1;
+        $(".tr_clone_add").on('click', function () {
+            c = c + 1;
+
             //var thisRow = $(this).closest('tr')[0];
-            //$(thisRow).clone().insertAfter(thisRow).find('input:text').val('');
-            var combo= $('#combo').html().replace("[1]", "["+c+"]");
-            var tr = ' <tr><td><input type="text" size="30" class="form-control validate[required, minSize[4]]" name="detalles['+c+'][codigobarras]" id="codigobarras"></td>';
-            tr = tr + ' <td><input type="text" size="30" class="form-control validate[required, minSize[4]]" name="detalles['+c+'][edicion]" id="edicion"></td>';
-            tr = tr + ' <td colspan="2">'+combo+'  </td>';
+            //$(thisRow).clon e().insertAfter(thisRow).find('input:text').val('');
+            var combo = $('#combo').html().replace("[1]", "[" + c + "]");
+            var tr = ' <tr><td><input type="text" size="30" class="form-control validate[required, minSize[4]]" name="detalles[' + c + '][codigobarras]" id="codigobarras"></td>';
+            tr = tr + ' <td><input type="text" size="30" class="form-control validate[required, minSize[4]]" name="detalles[' + c + '][edicion]" id="edicion"></td>';
+            tr = tr + ' <td colspan="2">' + combo + '  </td>';
             tr = tr + '  </tr>';
 
             $("#table-data tr:eq(1)").after(tr);
-  
- });
 
-  
+        });
+
+
     });
 </script>
