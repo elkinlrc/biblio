@@ -32,6 +32,7 @@ class Modules_Biblio_Model_PrestamosFacade implements Moon2_Interfaces_Mandatory
         return $this->_objdb->update($obj);
     }
 
+
 }
 
 

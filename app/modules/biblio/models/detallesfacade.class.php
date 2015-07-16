@@ -31,6 +31,10 @@ class Modules_Biblio_Model_DetallesFacade implements Moon2_Interfaces_MandatoryM
     public function update($obj) {
         return $this->_objdb->update($obj);
     }
+    public function jsonDetalles($buscar){
+        
+        echo $this->_objdb->jsonDetalles($buscar);
+    }
 
 }
 

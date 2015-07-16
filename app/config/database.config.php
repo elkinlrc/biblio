@@ -11,7 +11,7 @@ $CONFIG["PORT"][$index] = "5432";
 $CONFIG["HOST"][$index] = "localhost";
 $CONFIG["DRIVER"][$index] = "pgsql";
 $CONFIG["DRIVER_OPTIONS"][$index] = array();
-$CONFIG["DB_DEBUG"][$index] = FALSE;
+$CONFIG["DB_DEBUG"][$index] = false;
 
 
 // Connection block database 2

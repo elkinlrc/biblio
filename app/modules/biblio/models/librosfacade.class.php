@@ -42,6 +42,9 @@ class Modules_Biblio_Model_LibrosFacade implements Moon2_Interfaces_MandatoryMod
     public function update($obj) {
         return $this->_objdb->update($obj);
     }
+    public function search(&$rsNumRows, $limit_numrows, $page, $Data = array()){
+        return $this->_objdb->search($rsNumRows, $limit_numrows, $page, $Data);
+    }
 
 //put your code here
 }

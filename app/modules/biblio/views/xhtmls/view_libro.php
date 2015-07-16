@@ -14,10 +14,8 @@ if (!isset($DOM["SECURITY_ID"])) {
                         <h3>Crear Libro</h3>
                     </div>
                     <div class="widget-content">
-                        <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
-                            <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
-                            <input type="hidden" id="action" name="action" value="crear" />
-                            <input type="hidden" id="controller" name="controller" value="Biblio/LibrosController" />
+                        
+                        
                             <table class="table table-bordered table-highlight" >
                                 <thead>
                                     <tr>
@@ -30,29 +28,29 @@ if (!isset($DOM["SECURITY_ID"])) {
                                 <tbody>
                                     <tr>
                                         <td rowspan="2" colspan="2"><img src="..." class="img-responsive" alt="Responsive image"></td>
-                                        <td>Título</td>
-                                        <td></td>
+                                        <th>Título</th>
+                                        <td><?=$obj->get_titulo();?></td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>Subtítulo</td>
-                                    <td></td>
+                                        <th>Subtítulo</th>
+                                        <td><?=$obj->get_subtitulo();?></td>
 
-                                    <t/>
+                                <t/>
                                 <tr>
 
 
-                                    
+
                                 </tr>
                                 <tr>
-                                    <td>Clasificación</td>
+                                    <th>Clasificación</th>
                                     <td>
                                         <?php
                                         echo $formulario->addObject("MenuList", "codclasificacion", $comboClasificacion, "", "class='form-control'", "");
                                         ?>
                                     </td>
 
-                                    <td>Formato del libros</td>
+                                    <th>Formato del libros</th>
                                     <td>
                                         <?php
                                         echo $formulario->addObject("MenuList", "codformato", $comboFormatos, "", "class='form-control'", "");
@@ -63,28 +61,18 @@ if (!isset($DOM["SECURITY_ID"])) {
                                 $form = "";
                                 $i = 0;
                                 $variable = "";
-                                foreach ($registrosMetadatos as $indice => $campo) {
-
-
-                                    $i = $i + 1;
-                                    $lbminimo = "";
-                                    $lbrequerido = "";
-                                    $minimo = $campo["minimo"];
-                                    $requerido = $campo["requerido"];
-                                    if ($minimo > 0) {
-
-                                        $lbminimo = "minSize[" . $minimo . "]";
-                                    }
-                                    if ($requerido == "si") {
-                                        $lbrequerido = "required";
-                                    }
-
-                                    if ($i % 2 == 0) {
-                                        $form.="<tr>$variable<td>" . $campo["etiqueta"] . "</td><td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td></tr>";
-                                        $variable = "";
-                                    } else {
-                                        $variable.= "<td>" . $campo["etiqueta"] . "</td>";
-                                        $variable.= "<td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td>";
+                                if (count($registrosMetadatos)>0) {
+                                    foreach ($registrosMetadatos as $indice => $campo) {
+                                        
+                                        
+                                       $i = $i + 1;
+                                        if ($i % 2 == 0) {
+                                            $form.="<tr>$variable<td><strong>" . $campo . "</strong></td><td>" . $indice . "</td></tr>";
+                                            $variable = "";
+                                        } else {
+                                            $variable.= "<td><strong>" .$campo  . "</strong></td>";
+                                            $variable.= "<td>"  .$indice  . "</td>";
+                                        }
                                     }
                                 }
                                 echo $form;
@@ -99,25 +87,16 @@ if (!isset($DOM["SECURITY_ID"])) {
                                 <div class="tab-pane active" id="home">
                                     <table id="table-data" class="table table-bordered table-highlight">
                                         <tr>
-                                            <th colspan="4"><center>Copias del libro</center></th>
+                                            <th colspan="3"><center>Copias del libro</center></th>
                                         </tr>
                                         <tr>
-                                            <th >Código de Barras</th> <th >Edición</th> <th  >Sede</th><th><input type="button" class="tr_clone_add" value="Nuevo" name="add"></th>
+                                            <th >Código de Barras</th> <th >Edición</th> <th  >Sede</th>
                                         </tr>
                                         <tr  class="tr_clone">
 
-                                            <td><input type="text" id="codigobarras" name="detalles[1][codigobarras]" class="form-control validate[required, minSize[4]]" size="30"/></td>
-
-
-
-
-
-                                            <td ><input type="text" id="edicion" name="detalles[1][edicion]" class="form-control validate[required, minSize[4]]" size="30"/></td>
-                                            <td colspan="2">
-                                                <?php
-                                                echo $formulario->addObject("MenuList", "detalles[1][codsede]", $combosedes, "", "class='form-control' ", "");
-                                                ?>
-                                            </td >
+                                            <td></td>
+                                            <td ></td>
+                                            <td >  </td >
 
 
                                         </tr>
@@ -143,7 +122,7 @@ if (!isset($DOM["SECURITY_ID"])) {
                             </div>
 
 
-                        </form>
+                       
                         <div id="combo" style="display: none">
                             <?php
                             echo $formulario->addObject("MenuList", "detalles[1][codsede]", $combosedes, "", "class='form-control'", "");

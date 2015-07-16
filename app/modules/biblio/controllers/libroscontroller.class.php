@@ -49,11 +49,7 @@ class Modules_Biblio_Controllers_LibrosController {
 
 
 
-            echo '<pre>';
-            print_r($metadatosArray);
-            print_r($detallesArray);
-            echo '</pre>';
-
+            
 
 
             foreach ($metadatosArray as $key => $value) {
@@ -83,6 +79,12 @@ class Modules_Biblio_Controllers_LibrosController {
                         case 'codsede':
                             $_codsede = $value;
                             break;
+                        case 'codadquisicion':
+                            $_codadquisicion = $value;
+                            break;
+                        case 'precio':
+                            $_precio = $value;
+                            break;
                     }
                 }
 
@@ -92,6 +94,8 @@ class Modules_Biblio_Controllers_LibrosController {
                 $detalles->set_codsede($_codsede);
                 $detalles->set_codigobarras($_codigobarras);
                 $detalles->set_edicion($_edicion);
+                $detalles->set_codadquisicion($_codadquisicion);
+                $detalles->set_precio($_precio);
                 $detallesfacade = new Modules_Biblio_Model_DetallesFacade();
                 $detallesfacade->add($detalles);
             }
@@ -111,9 +115,6 @@ class Modules_Biblio_Controllers_LibrosController {
 
         $busqueda = $this->_parameters->get_parameter("buscador", "");
         $this->_parameters->delete_all(); //cuando termine de ahcer el proceso limpied get parametrer
-        
-      
-
         $this->_parameters->add("Sw", $palabraBusqueda);
         $this->_parameters->add("buscador", $busqueda);
         $cadenaurl = $this->_parameters->KeyGen();      //mensaje si se modifica la url

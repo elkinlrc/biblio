@@ -7,16 +7,17 @@ if (!isset($DOM["SECURITY_ID"])) {
 <div class="main">
     <div class="container well">
         <div class="row">
-            <div class="col-md-12">
-
-
-
-
-                <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
+            <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
+            <div class="col-md-3">
+               
                     <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
                     <input type="hidden" id="action" name="action" value="buscar" />
                     <input type="hidden" id="controller" name="controller" value="Biblio/LibrosController" />
                     <img src="<?= $PATH_CONFIG["ROOT"]["images"]; ?>/LogoHorizontal-UTS.png"  />
+            </div>
+                <div class="col-md-9">
+                    <br/>
+                    <br/>
                     <input type="text" class="input-xxlarge form-control" style="width: 530px;" id="buscado" name="buscador"  value="<?= $busqueda; ?>" />
                     <input type="submit" class=" btn btn-success" value="Buscar">
                     <ul>
@@ -36,12 +37,19 @@ if (!isset($DOM["SECURITY_ID"])) {
                                 echo "</tr>";
                             }
                             ?>
-                        </table>    
+                        </table>
+                        <br/>
+                        <br/>
                     </div>
 
 
 
-                </form>
+               
+            </div>
+             </form>    
+        </div>
+        <div class="row">
+             <div class="col-md-12">
                 <?php
                 echo $paginador->showDetails();
                 ?>
@@ -89,5 +97,7 @@ if (!isset($DOM["SECURITY_ID"])) {
     </div> <!-- /container -->
 </div> <!-- /main -->
 <script type="text/javascript">
-
+$("#bs-avanzada").click(function(){
+    $("#busqueda-avanzada").show();
+});
 </script>

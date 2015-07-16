@@ -30,12 +30,12 @@ if (!isset($DOM["SECURITY_ID"])) {
                                 <tbody>
                                     <tr>
                                         <td rowspan="2" colspan="2"><img src="..." class="img-responsive" alt="Responsive image"></td>
-                                        <td>Título</td>
+                                        <td><strong>Título</strong></td>
                                         <td><input type="text" id="titulo" name="titulo" class="form-control validate[required, minSize[4]]" size="30" value=""/></td>
                                         <td></td>
                                     </tr>
                                     <tr>
-                                        <td>Subtítulo</td>
+                                        <td><strong>Subtítulo</strong></td>
                                     <td><input type="text" id="subtitulo" name="subtitulo" class="form-control validate[required, minSize[4]]" size="30"/></td>
 
                                     <t/>
@@ -45,14 +45,14 @@ if (!isset($DOM["SECURITY_ID"])) {
                                     
                                 </tr>
                                 <tr>
-                                    <td>Clasificación</td>
+                                    <td><strong>Clasificación</strong></td>
                                     <td>
                                         <?php
                                         echo $formulario->addObject("MenuList", "codclasificacion", $comboClasificacion, "", "class='form-control'", "");
                                         ?>
                                     </td>
 
-                                    <td>Formato del libros</td>
+                                    <td><strong>Formato del libros</strong></td>
                                     <td>
                                         <?php
                                         echo $formulario->addObject("MenuList", "codformato", $comboFormatos, "", "class='form-control'", "");
@@ -63,6 +63,7 @@ if (!isset($DOM["SECURITY_ID"])) {
                                 $form = "";
                                 $i = 0;
                                 $variable = "";
+                                $total=count($registrosMetadatos);
                                 foreach ($registrosMetadatos as $indice => $campo) {
 
 
@@ -80,29 +81,53 @@ if (!isset($DOM["SECURITY_ID"])) {
                                     }
 
                                     if ($i % 2 == 0) {
-                                        $form.="<tr>$variable<td>" . $campo["etiqueta"] . "</td><td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td></tr>";
+                                        $form.="<tr>$variable<td><strong>" . $campo["etiqueta"] . "</strong></td><td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td></tr>";
                                         $variable = "";
                                     } else {
-                                        $variable.= "<td>" . $campo["etiqueta"] . "</td>";
+                                        $variable.= "<td><strong>" . $campo["etiqueta"] . "</strong></td>";
                                         $variable.= "<td><input type=\"text\" id=\"" . $campo["etiqueta"] . "\" name=\"valor[" . $campo["codmetadato"] . "]\" class=\"form-control validate[$lbrequerido, $lbminimo]\" size=\"30\"/></td>";
+                                      if($i==$total){
+                                          $form.=$variable;
+                                      }  
                                     }
                                 }
                                 echo $form;
                                 ?>
                             </table>
-                            <ul class="nav nav-tabs">
-                                <li  class="active" ><a href="#home" data-toggle="tab">Cantidad</a></li>
-                                <li><a href="#profile" data-toggle="tab">Autores</a></li>
 
-                            </ul>
-                            <div class="tab-content">
-                                <div class="tab-pane active" id="home">
-                                    <table id="table-data" class="table table-bordered table-highlight">
+
+<div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingOne">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Autores
+        </a>
+      </h4>
+    </div>
+    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+      <div class="panel-body">
+        
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading" role="tab" id="headingTwo">
+      <h4 class="panel-title">
+        <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+          Copias del libro
+        </a>
+      </h4>
+    </div>
+    <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+      <div class="panel-body">
+        <table id="table-data" class="table table-bordered table-highlight">
                                         <tr>
-                                            <th colspan="4"><center>Copias del libro</center></th>
+                                            <th colspan="6"><center>Copias del libro</center></th>
                                         </tr>
                                         <tr>
-                                            <th >Código de Barras</th> <th >Edición</th> <th  >Sede</th><th><input type="button" class="tr_clone_add" value="Nuevo" name="add"></th>
+                                            <th >Código de Barras</th> <th >Edición</th> <th  >Sede</th><th  >Tipo adquisición</th><th  >Precio</th>
+                                            <th><button type="button" class="tr_clone_add"  name="add" ><i class="mdi-content-add"></i></button></th>
                                         </tr>
                                         <tr  class="tr_clone">
 
@@ -113,40 +138,44 @@ if (!isset($DOM["SECURITY_ID"])) {
 
 
                                             <td ><input type="text" id="edicion" name="detalles[1][edicion]" class="form-control validate[required, minSize[4]]" size="30"/></td>
-                                            <td colspan="2">
+                                            <td >
                                                 <?php
                                                 echo $formulario->addObject("MenuList", "detalles[1][codsede]", $combosedes, "", "class='form-control' ", "");
                                                 ?>
                                             </td >
-
+                                            <td >
+                                                <?php
+                                                echo $formulario->addObject("MenuList", "detalles[1][codadquisicion]", $comboAdquisiciones, "", "class='form-control' ", "");
+                                                ?>
+                                            </td >
+                                            <td colspan="2"><input type="text" id="precio" name="detalles[1][precio]" class="form-control" size="30"/></td>
 
                                         </tr>
                                         </tr>
                                         <tr>
-                                            <th colspan="4"><br/></th>
+                                            <th colspan="6"><br/></th>
                                         </tr>
                                         <tr>
-                                            <td colspan="4"><input type="submit" value="Crear Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
+                                            <td colspan="5"></td><td><input type="submit" value="Crear Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
                                         </tr>
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="tab-pane" id="profile">
-                                    <input type="text" name="autor" class="form-control" >
-
-
-
-
-
-                                </div>
-
-                            </div>
+      </div>
+    </div>
+  </div>
+  
+</div>
 
 
                         </form>
-                        <div id="combo" style="display: none">
+                        <div id="combo1" style="display: none">
                             <?php
                             echo $formulario->addObject("MenuList", "detalles[1][codsede]", $combosedes, "", "class='form-control'", "");
+                            ?>
+                        </div>
+                          <div id="combo2" style="display: none">
+                            <?php
+                            echo $formulario->addObject("MenuList", "detalles[1][codadquisicion]",$comboAdquisiciones, "", "class='form-control'", "");
                             ?>
                         </div>
                     </div> <!-- /widget-content -->
@@ -163,10 +192,13 @@ if (!isset($DOM["SECURITY_ID"])) {
 
             //var thisRow = $(this).closest('tr')[0];
             //$(thisRow).clon e().insertAfter(thisRow).find('input:text').val('');
-            var combo = $('#combo').html().replace("[1]", "[" + c + "]");
+            var combo1 = $('#combo1').html().replace("[1]", "[" + c + "]");
+            var combo2 = $('#combo2').html().replace("[1]", "[" + c + "]");
             var tr = ' <tr><td><input type="text" size="30" class="form-control validate[required, minSize[4]]" name="detalles[' + c + '][codigobarras]" id="codigobarras"></td>';
             tr = tr + ' <td><input type="text" size="30" class="form-control validate[required, minSize[4]]" name="detalles[' + c + '][edicion]" id="edicion"></td>';
-            tr = tr + ' <td colspan="2">' + combo + '  </td>';
+            tr = tr + ' <td >' + combo1 + '  </td>';
+            tr = tr + ' <td >' + combo2 + '  </td>';
+            tr = tr + ' <td ><input type="text" class="form-control " name="detalles[' + c + '][precio]" id="precio">  </td>';
             tr = tr + '  </tr>';
 
             $("#table-data tr:eq(1)").after(tr);

@@ -11,17 +11,18 @@ if (!isset($DOM["SECURITY_ID"])) {
                 <div class="widget stacked">
                     <div class="widget-header">
                         <i class="icon-th-large"></i>
-                        <h3>Crear Clasificación</h3>
+                        <h3>Editar Autor</h3>
                     </div>
                     <div class="widget-content">
                         <form id="frm" name="frm" method="POST" action="traceo.php" onsubmit="javascript:return checkform('frm');">
                             <input type="hidden" id="SECURITY_ID" name="SECURITY_ID" value="false"/>
-                            <input type="hidden" id="action" name="action" value="crear" />
-                            <input type="hidden" id="controller" name="controller" value="Biblio/clasificacionesController" />
+                            <input type="hidden" id="action" name="action" value="editar" />
+                            <input type="hidden" id="controller" name="controller" value="Biblio/AutoresController" />
+                            <input type="hidden" id="codautor" name="codautor" value="<?php echo $obj->get_codautor();?>" />
                             <table class="table table-bordered table-highlight">
                                 <thead>
                                     <tr>
-                                        <th colspan="2">Clasificación </th>
+                                        <th colspan="2">Nuevo Autor</th>
                                     </tr>
 
 
@@ -29,16 +30,12 @@ if (!isset($DOM["SECURITY_ID"])) {
                                 </thead>
                                 <tbody> 
                                     <tr>
-                                        <td>Codigo</td>
-                                        <td><input type="text" id="codigo" name="codigo" class="form-control validate[required, minSize[4]]" size="30"/></td>
+                                        <td>Autor</td>
+                                        <td><input type="text" id="nombre" name="nombre" value="<?php echo $obj->get_nombre(); ?>" class="form-control validate[required, minSize[4]]" size="30"/></td>
                                     </tr>
+                                    
                                     <tr>
-                                        <td>Nombre</td>
-                                        <td><input type="text" id="nombre" name="nombre" class="form-control validate[required, minSize[4]]" size="30"/></td>
-                                    </tr>
-                                  
-                                    <tr>
-                                        <td colspan="2"><input type="submit" value="Crear Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
+                                        <td colspan="2"><input type="submit" value="Actualizar Registro" id="btncrearr" name="btncrearr" class="form-control btn-success"/></td>
                                     </tr>
                                 </tbody>
                             </table>

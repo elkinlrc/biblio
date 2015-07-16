@@ -180,6 +180,7 @@ private function menu($arrayData){
         if($numChildrenCurrent > 0){
             $newArrayData = $this->getArray($field["codfunc"]);
             $html.= "  <li class=\"dropdown-submenu\">\n";
+            // $html.= "  <li class=\"dropdown-menu\">\n";
             $html.= "    <a tabindex=\"-".$field["codpadre"]."\" href=\"".$field["urlpagina"]."\">".$field["nombre"]."</a>\n";
             $html.= $this->levelOne($newArrayData);
             $html.= "  </li>\n";

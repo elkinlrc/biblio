@@ -8,7 +8,9 @@ class Modules_Biblio_Model_Detalles{
     private $_fechacreacion;
     private $_edicion;
     private $_codsede;
-    
+    private $_codadquisicion;
+    private $_precio;
+            
     
     function __construct() {
     }
@@ -61,6 +63,22 @@ class Modules_Biblio_Model_Detalles{
 
     function set_codsede($_codsede) {
         $this->_codsede = $_codsede;
+    }
+
+    function get_codadquisicion() {
+        return $this->_codadquisicion;
+    }
+
+    function get_precio() {
+        return $this->_precio;
+    }
+
+    function set_codadquisicion($_codadquisicion) {
+        $this->_codadquisicion = $_codadquisicion;
+    }
+
+    function set_precio($_precio) {
+        $this->_precio = $_precio;
     }
 
 

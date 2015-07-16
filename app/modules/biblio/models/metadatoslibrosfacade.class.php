@@ -35,6 +35,11 @@ class Modules_Biblio_Model_MetadatoslibrosFacade implements Moon2_Interfaces_Man
         return $this->_objdb->loadMetadatosLibros();
         
     }
+    public function loadOneMetadatos($codlibro) {
+              
+        return $this->_objdb->loadOneMetadatos($codlibro);
+        
+    }
 
 }
 

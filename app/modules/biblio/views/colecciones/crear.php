@@ -1,8 +1,7 @@
 <?php
 require("../../../../config/config.inc.php");
-$DOM["SECURITY_ID"]=array("MNTO_LIBRO");
+$DOM["SECURITY_ID"] = array("MNTO_COLEC");
 require("viewmanager/security.inc.php");
-
 
 $parametros = new Moon2_Params_Parameters();
 $parametros->verify("GET", FALSE);
@@ -13,26 +12,6 @@ $Face = new Moon2_ViewManager_Controller();
 $Face->set_sysmenu(TRUE);
 $Face->set_type("INSIDE");
 $Face->set_name("Crear");
-
-
-$facadeMetadatos = new Modules_Biblio_Model_MetadatosFacade();
-$registrosMetadatos = $facadeMetadatos->loadMetadatosLibros();
-
-$facadeClasificacion = new Modules_Biblio_Model_ClasificacionesFacade();
-$comboClasificacion = $facadeClasificacion->combo();
-
-$facadeFormatos= new Modules_Biblio_Model_FormatosFacade();
-$comboFormatos = $facadeFormatos->combo();
-
-$facadeSedes= new Modules_Biblio_Model_SedesFacade();
-$combosedes = $facadeSedes->combo();
-
-$facadeAdquisiciones= new Modules_Biblio_Model_AdquisicionesFacade();
-$comboAdquisiciones = $facadeAdquisiciones->combo();
-
-
-
-$formulario= new Moon2_Forms_Form();
 
 $Face->add_navigation("Inicio", "index.php");
 $Face->add_navigation("Crear ", "#");

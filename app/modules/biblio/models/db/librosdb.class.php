@@ -50,14 +50,22 @@ class Modules_Biblio_ModelDb_Librosdb extends Moon2_DBmanager_PDO{
     }
     
     public function search(&$rsNumRows, $limit_numrows, $page, $Data){
-        
-        $where=" m.valor = ";
+        $arreglo=array();
+
+        if(isset($Data["busqueda"])){
+//echo "<pre>";
+  //          print_r($Data);
+    //        echo "</pre>";
+            $valor=$Data["busqueda"]["valor"];
+      //      print "<br/>".$valor;
+        //$order=" ";
+        $where=" ";
         $from = "FROM ".$this->_table." l ";
         $join="  inner join metadatoslibros m on l.codlibro=m.codlibro ";
-        $join="  inner join detalles d on l.codlibro=d.codlibro ";
-        if(isset($Data["busqueda"])){
-            $where = $this->get_where($Data["busqueda"]);
-        }
+       // $join="  inner join detalles d on l.codlibro=d.codlibro ";
+        //$where = $this->get_where($Data["busqueda"]);
+        $where =" where translate(lower(cast( m.valor as text)),'áàéèíìóòúù','aaeeiioouu') LIKE lower(('%' || translate(lower('$valor'),'áàéèíìóòúù','aaeeiioouu') || '%')) ";
+        
         $order = " ";
         $group ="";
                                
@@ -68,17 +76,18 @@ class Modules_Biblio_ModelDb_Librosdb extends Moon2_DBmanager_PDO{
         $sql_num.=$join;
 
         $rsNumRows = $this->GetOne($sql_num);
-        $sql_registros = "SELECT l.".$this->_Pkey["key"].", l.titulo,l.subtitulo ";
+        $sql_registros = "SELECT l.".$this->_Pkey["key"].",l.titulo,l.subtitulo ";
         $sql_registros.=$from;
+        $sql_registros.=$join;
         $sql_registros.=$where;
         $sql_registros.=$order;
-        $sql_registros.=$join;
+       
         
-       // echo $sql_registros;
-      //  exit();
+     echo $sql_registros;
+     // exit();
 
         $arreglo = $this->SelectLimit($sql_registros, $limit_numrows, $page);
-
+}
         return $arreglo;
     }
     

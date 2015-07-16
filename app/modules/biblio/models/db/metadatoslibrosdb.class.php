@@ -53,6 +53,16 @@ class Modules_Biblio_ModelDb_Metadatoslibrosdb extends Moon2_DBmanager_PDO{
         
         
     }
+    public function loadOneMetadatos($codlibro) {
+        $sql="select ml.valor,m.etiqueta from ". $this->_table ." ml inner join metadatos m on ml.codmetadato=m.codmetadato  where  codlibro=$codlibro  ";
+        
+        $datos= $this->GetAssoc($sql);
+        
+        //var_dump($datos);
+        
+        //exit();
+        return $datos;
+    }
     
     
     

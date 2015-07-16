@@ -24,8 +24,11 @@ $facade = new Modules_Biblio_Model_LibrosFacade();
 $obj = $facade->loadOne($obj);
 
 
-$facadeMetadatos = new Modules_Biblio_Model_MetadatosFacade();
-$registrosMetadatos = $facadeMetadatos->loadMetadatosLibros();
+$facadeMetadatos = new Modules_Biblio_Model_MetadatoslibrosFacade();
+$registrosMetadatos = $facadeMetadatos->loadOneMetadatos($codigo);
+
+//var_dump($registrosMetadatos);
+//exit();
 
 $facadeClasificacion = new Modules_Biblio_Model_ClasificacionesFacade();
 $comboClasificacion = $facadeClasificacion->combo();

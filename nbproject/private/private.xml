@@ -2,6 +2,13 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/opt/lampp/htdocs/biblio/app/modules/biblio/views/colecciones/xhtmls/view_crear.php</file>
+            <file>file:/opt/lampp/htdocs/biblio/app/modules/biblio/models/db/coleccionesdb.class.php</file>
+            <file>file:/opt/lampp/htdocs/biblio/app/modules/biblio/controllers/coleccionescontroller.class.php</file>
+            <file>file:/opt/lampp/htdocs/biblio/app/modules/biblio/models/coleccionesfacade.class.php</file>
+            <file>file:/opt/lampp/htdocs/biblio/app/modules/biblio/models/colecciones.class.php</file>
+            <file>file:/opt/lampp/htdocs/biblio/app/moon2/dbmanager/pdo.class.php</file>
+        </group>
     </open-files>
 </project-private>

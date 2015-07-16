@@ -46,6 +46,21 @@ class Modules_Biblio_ModelDb_Detallesdb extends Moon2_DBmanager_PDO{
         $Arraybanco = $this->GetAssoc($sql);
         return $Arraybanco;
     }
+    public function loadOneDetalles($codlibro){
+        $sql="select * from detalles where codlibro=$codlibro ";
+        $datos= $this->GetAssoc($sql);
+        return $datos;
+            
+    }
+    public function jsonDetalles($buscar){
+        
+        $sql="select * from  libros l left join  detalles d on d.codlibro=l.codlibro  ";
+        $sql.= " where codigobarras like '$buscar%' or l.titulo like '%$buscar%' ";
+        
+        //echo $sql;
+        $json=$this->GetAll($sql);
+        return json_encode($json);
+    }
     
     
     

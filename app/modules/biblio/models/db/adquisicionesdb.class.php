@@ -1,12 +1,12 @@
 <?php
 
-class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
+class Modules_Biblio_ModelDb_Adquisicionesdb extends Moon2_DBmanager_PDO{
     
     
     public function __construct() {
         parent::__construct();   //herede todo del padre
-        $this->_table = "autores";
-        $this->_Pkey["key"] = "codautor";
+        $this->_table = "adquisiciones";
+        $this->_Pkey["key"] = "codadquisicion";
         $this->_Pkey ["value"] = 0;
         $this->_sequence = $this->_table . "_" . $this->_Pkey["key"] . "_seq";
     }
@@ -19,7 +19,6 @@ class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
         $where=" ";
         $from = "FROM ".$this->_table." a ";
         if(isset($Data["busqueda"])){
-            print_r($Data);
             $where = $this->get_where($Data["busqueda"]);
         }
         $order = " ";
@@ -35,9 +34,6 @@ class Modules_Biblio_ModelDb_Autoresdb extends Moon2_DBmanager_PDO{
         $sql_registros.=$from;
         $sql_registros.=$where;
         $sql_registros.=$order;
-
-        //echo $sql_registros;
-      //exit();
 
         $arreglo = $this->SelectLimit($sql_registros, $limit_numrows, $page);
 

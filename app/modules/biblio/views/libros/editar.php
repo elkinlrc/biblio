@@ -36,6 +36,9 @@ $comboClasificacion = $facadeClasificacion->combo();
 $facadeFormatos= new Modules_Biblio_Model_FormatosFacade();
 $comboFormatos = $facadeFormatos->combo();
 
+$facadeAdquisiciones= new Modules_Biblio_Model_AdquisicionesFacade();
+$comboAdquisiciones = $facadeAdquisiciones->combo();
+
 
 $formulario= new Moon2_Forms_Form();
 
